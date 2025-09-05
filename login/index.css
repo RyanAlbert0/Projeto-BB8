@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+
+/* Ativando a fonte importada acima para a divisão BODY */
+body {
+
+    font-family: 'Josefin Sans', sans-serif;
+    color: rgb(0, 0, 0);
+    margin-top: 20px;
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    background-color: aqua;
+
+}
+
+/* Estilizando os INPUTS User e Token, ajustando dimensões, bordas e colorações */
+.adminAccessInput {
+    width: 200px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid black;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    font-size: 16px;
+}
+
+/* Transformando um texto link em um texto comum */
+.hrefStyles{
+    text-decoration: none;
+    color: black;
+    font-size: 30px;
+}
+
+#freeAccessBTN {
+
+    width: 200px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid black;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: white;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 20px;
+
+}
+
+#header {
+    background-color: green;
+    height: 80px;           /* Altura fixa para o header */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ajuste o #page para não sobrepor o header */
+#page {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 500px;
+    margin-top: 100px;      /* Espaço suficiente para o header */
+}
+
+
+/* Alinhar divs do login */
+
+#login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: brown;
+    width: 50vw;
+    min-height: 250px;    /* Altura mínima, não ocupa a tela toda */
+    height: auto;         /* Altura automática conforme o conteúdo */
+    margin-top: 0;        /* Remove qualquer margin extra */
+    box-sizing: border-box;
+}
+
+#freeAccess {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 250px;    /* Altura mínima, não ocupa a tela toda */
+    height: auto;         /* Altura automática conforme o conteúdo */
+    margin-top: 0;        /* Remove qualquer margin extra */
+    box-sizing: border-box;
+}
+
+#freeAccess .hrefStyles {
+    width: 80%;
+    display: block; /* Para que a largura seja aplicada corretamente */
+    text-align: center; /* Opcional: centraliza o texto/link */
+    margin: 10px auto;  /* Opcional: centraliza horizontalmente */
+    font-size: 30px;
+    border: none;
+    border-radius: 15px;
+}
+
+#adminAccess {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 250px;    /* Altura mínima, não ocupa a tela toda */
+    height: auto;         /* Altura automática conforme o conteúdo */
+    margin-top: 0;        /* Remove qualquer margin extra */
+    box-sizing: border-box;
+}
