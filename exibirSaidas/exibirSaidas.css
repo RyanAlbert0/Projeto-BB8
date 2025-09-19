@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:opsz@8..144&display=swap');
+
+/* Ativando a fonte importada acima para a divisão BODY */
+body {
+
+   
+    font-family: 'Roboto Serif', serif;
+    color: rgb(0, 0, 0);
+    margin-top: 20px;
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    background-color: rgb(247, 233, 195);
+
+}
+
+#title {
+
+
+
+}
+
+#content

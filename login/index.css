@@ -1,15 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:opsz@8..144&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech&display=swap');
 
 /* Ativando a fonte importada acima para a divisão BODY */
 body {
 
-    font-family: 'Josefin Sans', sans-serif;
+   
+    font-family: 'Roboto Serif', serif;
     color: rgb(0, 0, 0);
     margin-top: 20px;
     padding: 0px;
     margin: 0px;
     box-sizing: border-box;
-    background-color: aqua;
+    background-color: rgb(247, 233, 195);
 
 }
 
@@ -32,27 +34,14 @@ body {
     font-size: 30px;
 }
 
-#freeAccessBTN {
-
-    width: 200px;
-    height: 30px;
-    border-radius: 5px;
-    border: 1px solid black;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    background-color: white;
-    cursor: pointer;
-    font-size: 16px;
-    padding: 20px;
-
-}
-
 #header {
-    background-color: green;
+    background-color: rgb(255, 123, 0);
     height: 80px;           /* Altura fixa para o header */
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 25px;
+    font-family: 'Share Tech', sans-serif;
 }
 
 /* Ajuste o #page para não sobrepor o header */
@@ -74,12 +63,13 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: brown;
-    width: 50vw;
+    background-color: rgb(169, 169, 169);
+    width: 900px;
     min-height: 250px;    /* Altura mínima, não ocupa a tela toda */
-    height: auto;         /* Altura automática conforme o conteúdo */
+    height: 500px;    /* Altura automática conforme o conteúdo */
     margin-top: 0;        /* Remove qualquer margin extra */
     box-sizing: border-box;
+    border-radius: 30px;
 }
 
 #freeAccess {
@@ -98,10 +88,14 @@ body {
     width: 80%;
     display: block; /* Para que a largura seja aplicada corretamente */
     text-align: center; /* Opcional: centraliza o texto/link */
-    margin: 10px auto;  /* Opcional: centraliza horizontalmente */
-    font-size: 30px;
-    border: none;
+    margin: auto;  /* Opcional: centraliza horizontalmente */
+    font-size: 80px;
     border-radius: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: white;
+    cursor: pointer;
+    padding: 10px;
 }
 
 #adminAccess {
@@ -115,3 +109,45 @@ body {
     margin-top: 0;        /* Remove qualquer margin extra */
     box-sizing: border-box;
 }
+
+#adminAccess .hrefStyles {
+    width: 20%;
+    display: block; /* Para que a largura seja aplicada corretamente */
+    text-align: center; /* Opcional: centraliza o texto/link */
+    margin: auto;  /* Opcional: centraliza horizontalmente */
+    font-size: 30px;
+    border-radius: 15px;
+    margin-top: 10px;
+    margin-bottom: 100px;
+    background-color: white;
+    cursor: pointer;
+    padding: auto;
+    margin-right: auto;
+
+}
+
+#adminAccess .text {
+    font-size: 40px;
+    margin-bottom: 20px;
+    margin-top: 10px;;
+}
+
+#adminAccess .adminAccessInput {
+    margin-bottom: 5px;
+    font-size: 20px;
+    height: 40px;
+    
+}
+#whiteBox {
+    background-color: white;
+    width: 45%;
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 200px;
+
+}
+
+  
