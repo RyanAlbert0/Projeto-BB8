@@ -1,0 +1,47 @@
+body {
+    font-family: 'Roboto Serif', serif;
+    color: rgb(255, 255, 255);
+    margin-top: 20px;
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    background-color:rgb(242, 195, 151);
+}
+
+#title{
+        background-color: rgb(255, 123, 0);
+    height: 80px;           /* Altura fixa para o header */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    font-family: 'Share Tech', sans-serif;
+}
+
+#content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: calc(100vh - 80px); /* Altura total da viewport menos a altura do título */
+
+
+}
+
+#inputs{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: auto;
+
+}
+
+#canvas {
+
+    width: 50%;
+    height: auto;
+
+}

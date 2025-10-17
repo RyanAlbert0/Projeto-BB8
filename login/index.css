@@ -119,7 +119,7 @@ body {
     border-radius: 15px;
     margin-top: 10px;
     margin-bottom: 100px;
-    background-color: white
+    background-color: white;
     cursor: pointer;
     padding: auto;
     margin-right: auto;
@@ -162,8 +162,12 @@ body {
     width: 300px; /* ajuste conforme necessário */
     height: auto;
 }
+#logoSESI {
+    height: 50%;
+    margin: 10px;
 
-/* "colocar a logo do sesi tentar usar uma sem fundo" */
+ }
+
 
  
 

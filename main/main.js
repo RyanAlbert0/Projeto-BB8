@@ -1,15 +1,18 @@
-// Identificar Elementos
+document.addEventListener('DOMContentLoaded', () => {
+    const addButton = document.getElementById('addButton');
+    const timeEl = document.getElementById('time');
+    const hurdleEl = document.getElementById('hurdle');
+    const selectorEl = document.getElementById('exit');
 
-const time = document.getElementById('time');
-const hurdle = document.getElementById('hurdle');
-const selector = document.getElementById('exit');
-const slot = document.getElementById('slot');
-const round = document.getElementById('round');
-const addButton = document.getElementById('addButton');
+    if (!addButton) return;
 
-// Usar os dados
+    addButton.addEventListener('click', () => {
+        const time = Number(timeEl?.value) || 0;
+        const hurdle = Number(hurdleEl?.value) || 0;
+        const selector = Number(selectorEl?.value) || 0;
+        const media = (time + hurdle + selector) / 3;
+        console.log(`Média calculada: ${media}`);
+        
 
-addButton.addEventListener('click', function() {
-    const matriz = (time+hurdle+selector)/3
-    
+    });
 });
