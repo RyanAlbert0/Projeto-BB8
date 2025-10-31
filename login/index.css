@@ -120,18 +120,25 @@ body {
 }
 
 #adminAccess .hrefStyles {
-    width: 40%;
-    display: block; /* Para que a largura seja aplicada corretamente */
-    text-align: center; /* Opcional: centraliza o texto/link */
-    margin: auto;  /* Opcional: centraliza horizontalmente */
-    font-size: 30px;
-    border-radius: 15px;
-    margin-top: 10px;
-    margin-bottom: 100px;
+    width: 80%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+    font-size: 16px;
+    border-radius: 4px;
     background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     cursor: pointer;
-    padding: auto;
+    text-decoration: none;
+    font-family: 'Oswald', sans-serif;
+    transition: background-color 0.2s;
+}
 
+#adminAccess .hrefStyles:hover {
+    background-color: rgb(225, 108, 0);
+    text-decoration: none;
 }
 
 #adminAccess .text {
