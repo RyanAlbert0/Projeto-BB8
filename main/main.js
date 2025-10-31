@@ -11,8 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const hurdle = Number(hurdleEl?.value) || 0;
         const selector = Number(selectorEl?.value) || 0;
         const media = (time + hurdle + selector) / 3;
-        console.log(`Média calculada: ${media}`);
+        window.alert(`Média das notas: ${media.toFixed(2)}`);
         
 
     });
 });
+
