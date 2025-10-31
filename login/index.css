@@ -6,7 +6,7 @@ body {
 
    
     font-family: 'Roboto Serif', serif;
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     margin-top: 20px;
     padding: 0px;
     margin: 0px;
@@ -20,17 +20,26 @@ body {
     width: 200px;
     height: 30px;
     border-radius: 5px;
-    border: 1px solid black;
+    border: none;                /* sem borda por padrão */
+    background-color: #ffffff;   /* fundo branco */
     margin-top: 10px;
     margin-bottom: 10px;
     padding-left: 10px;
     font-size: 16px;
+    transition: border 0.15s ease, box-shadow 0.15s ease;
+    outline: none;
+}
+
+.adminAccessInput:focus {
+    border: 1px solid #000;      /* borda preta ao clicar/focar */
+    box-shadow: 0 0 0 3px rgba(0,0,0,0.06); /* opcional: realce sutil */
+    outline: none;
 }
 
 /* Transformando um texto link em um texto comum */
 .hrefStyles{
     text-decoration: none;
-    color: rgb(255, 123, 0);
+    color: rgb(0, 0, 0);
     font-size: 30px;
 }
 
@@ -92,7 +101,7 @@ body {
     border-radius: 15px;
     margin-top: 10px;
     margin-bottom: 10px;
-    background-color:rgb(242, 195, 151);
+    background-color:rgb(246, 174, 80);
     cursor: pointer;
     padding: 10px;
     font-family: Oswald, serif;
@@ -111,7 +120,7 @@ body {
 }
 
 #adminAccess .hrefStyles {
-    width: 20%;
+    width: 40%;
     display: block; /* Para que a largura seja aplicada corretamente */
     text-align: center; /* Opcional: centraliza o texto/link */
     margin: auto;  /* Opcional: centraliza horizontalmente */
@@ -119,10 +128,9 @@ body {
     border-radius: 15px;
     margin-top: 10px;
     margin-bottom: 100px;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     cursor: pointer;
     padding: auto;
-    margin-right: auto;
 
 }
 
@@ -139,7 +147,7 @@ body {
     
 }
 #whiteBox {
-    background-color: rgb(242, 195, 151);
+    background-color: rgb(246, 174, 80);
     width: 45%;
     padding: 20px;
     border-radius: 20px;
@@ -169,6 +177,5 @@ body {
  }
 
 
- 
 
-  
+
