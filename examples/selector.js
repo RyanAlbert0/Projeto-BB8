@@ -19,3 +19,11 @@ window.onload = function() {
 		}
 	});
 }
+
+
+const valores = [
+	{"Pos": 1, "Valor": {"X": 200, "Y": 300}},
+	{"Pos": 2, "Valor": {"X": 300, "Y": 100}},
+	{"Pos": 3, "Valor": {"X": 150, "Y": 700}}
+]
+
