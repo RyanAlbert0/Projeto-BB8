@@ -3,21 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exibição de Saídas</title>
+    <title>Acessar: BB8 Archaeologist</title>
+    <script src="exibirSaidas.js" defer></script>
     <link rel="stylesheet" href="exibirSaidas.css">
-    <script src="exibirSaidas.js"></script>
 </head>
 <body>
     <div id="title">
-        <p>BB8 Archaeologist</p>
+        <h1>BB8: Archaeologist</h1>
+        <img src="../login/sesi-logo-14.png" id="logoSESI">
     </div>
+
     <div id="content">
-        <div id="mapa">
-            <p>Loren</p>
+        
+        <div id="map">
+            <!-- Mantive a imagem no DOM (oculta) — o canvas irá desenhá-la.
+                 id agora é "table" conforme solicitado -->
+            <img src="table.jpg" id="table" style="display:none">
         </div>
-        <div id="selector">
-            <p>Loren</p>
+
+
+            <canvas id="canvas" width="400" height="300"></canvas>
+        <div id="inputs">
+            <select name="exits" id="exits">
+                <option value="" disabled selected>Selecione a saída</option>
+            </select>
         </div>
+
+        
     </div>
 </body>
 </html>

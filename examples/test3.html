@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="test3.js" defer></script>
+    <link rel="stylesheet" href="test3.css">
+</head>
+<body>
+     <div id="title">
+        <h1>BB8: Archaeologist</h1>
+        <img src="../login/sesi-logo-14.png" id="logoSESI">
+    </div>
+    <div id="content">
+        
+        <div id="map">
+            <!-- Mantive a imagem no DOM (oculta) — o canvas irá desenhá-la.
+                 id agora é "table" conforme solicitado -->
+            <img src="table.jpg" id="table" style="display:none">
+        </div>
+            <canvas id="canvas" width="400" height="300"></canvas>
+
+        <div id="inputs">
+            <input type="number" id="time" placeholder="Insira o tempo">
+            <input type="number" id="hurdle" placeholder="Insira a complexidade">
+            <select name="" id="exit">
+                <option value="1">Local 1</option>
+                <option value="2">Local 2</option>
+                <option value="3">Local 3</option>
+            </select>
+            <input type="number" id="slot" placeholder="Insira o ID do slot">
+            <input type="checkbox" name="" id="round" > Arredondar
+            <p id="resultados"></p>
+            <div class="controls" id="controls"></div>
+            <button type="button" id="addButton">Adicionar a lista</button>
+            <a href="../exibirSaidas/exibirSaidas.html"> Exibir Saídas</a> 
+        </div>
+    </div>
+</body>
+</html>
