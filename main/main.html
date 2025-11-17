@@ -20,7 +20,7 @@
             <img src="table.jpg" id="table" style="display:none">
         </div>
             <canvas id="canvas" width="400" height="300"></canvas>
-
+            <img src="imagembb8.png" id="bb8Image" alt="Imagem do BB8">
         <script>
 document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('canvas');
@@ -134,15 +134,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
     </script>
         <div id="inputs">
+            <input type="text" id="slot" placeholder="Insira o nome da missão">
             <input type="number" id="time" placeholder="Insira o tempo">
             <input type="number" id="hurdle" placeholder="Insira a complexidade">
-            <select name="" id="exit">
-                <option value="1">Local 1</option>
-                <option value="2">Local 2</option>
-                <option value="3">Local 3</option>
-            </select>
-            <input type="number" id="slot" placeholder="Insira o ID do slot">
-            <input type="checkbox" name="" id="round" > Arredondar
             <div class="controls" id="controls"></div>
             <button type="button" id="addButton">Adicionar a lista</button>
             <a href="../exibirSaidas/exibirSaidas.html"> Exibir Saídas</a> 

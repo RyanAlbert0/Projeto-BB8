@@ -8,8 +8,28 @@
 
 </head>
 <body>
-    <h1>Insira os dados:</h1>
-    <input type="text" placeholder="Insira o email">
-    <input type="password" placeholder="Insira a senha">
+    <input type="text" id="valor" placeholder="Coloque 1 para mensagem A, coloque 2 para outra página">
+    <button onclick="validar()">Fazer teste</button>    
+    
+
+
+    <script>
+        // Idenfificar elementos
+        const botao = document.getElementById('botao');
+
+        function validar()  {
+            var valor = document.getElementById('valor').value;
+            
+             if(valor == '1'){
+                 alert('Mensagem A');
+             } else if (valor == '2'){
+                window.location.href = '../main/main.html';
+             } else {
+                 alert('Valor inválido');
+             }
+        }
+
+
+    </script>
 </body>
 </html>

@@ -27,11 +27,34 @@
                 <div id="whiteBox">
                     <h1 class="text">Modo Administrador</h1>
                     <input type="text" id="user" class="adminAccessInput" placeholder="Usuário">
-                    <input type="int" id="token" class="adminAccessInput" placeholder="Senha">
-                    <a href="../main/main.html" class="hrefStyles">Acessar</a>
+                    <input type="password" id="token" class="adminAccessInput" placeholder="Senha">
+                    <button onclick="access()">Acessar</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        // Identificar elementos
+
+        function access() {
+            const user = document.getElementById('user').value;
+            const token = document.getElementById('token').value;
+
+            // Credenciais fixas para exemplo
+            const validUser = 'admin';
+            const validToken = '123456';
+
+            if (user === validUser && token === validToken) {
+                // Redirecionar para a página principal
+                window.location.href = '../main/main.html';
+            } else {
+                alert('Usuário ou senha incorretos!');
+                window.location.reload();
+            }
+        }
+        
+
+    </script>
 </body>
 </html>
