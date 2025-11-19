@@ -96,32 +96,50 @@ function drawAll() {
 
 // Event listener para cliques no canvas
 canvas.addEventListener('click', function(event) {
-    // Obtendo as coordenadas do clique relativas ao canvas
     const rect = canvas.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-    // Verificando qual botão foi clicado
-    buttons.forEach(button => {
-        if (isInsideButton(x, y, button)) {
-            buttons.forEach(b => b.selected = false);
-            button.selected = true;
-            drawAll();
-            // Busca o valor correspondente com depuração
-            console.log('Botão clicado:', button.text);
-            const info = valores.find(v => String(v.Pos) === String(button.text).trim());
-            console.log('Resultado da busca:', info);
-            const resultados = document.getElementById('resultados');
-            if (!resultados) {
-                alert('Elemento com id "resultados" não encontrado no HTML!');
+
+    // Ajuste de escala para compensar o CSS (width: 50%, height: auto)
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+
+    // Coordenadas ajustadas
+    const x = (event.clientX - rect.left) * scaleX;
+    const y = (event.clientY - rect.top) * scaleY;
+
+    console.log(`Clique ajustado: x=${x}, y=${y}`);
+
+    // Cria o mecanismo de salvar as saídas e o nome das missões
+
+    const saida = document.getElementById('exit').value.trim()
+    const missao = document.getElementById('mission').value
+    const tempo = document.getElementById('time').value.trim()
+    const complexidade = document.getElementById('hurdle').value.trim()
+
+
+    // Encontra o botão clicado
+    const clickedButton = buttons.find(button => isInsideButton(x, y, button));
+
+    if (clickedButton) {
+        buttons.forEach(b => b.selected = false);
+        clickedButton.selected = true;
+        drawAll();
+
+        console.log('Botão clicado:', clickedButton.text);
+
+        const info = valores.find(v => String(v.Pos) === String(clickedButton.text).trim());
+        if (saida) {
+            let lista = localStorage.getItem(saida);
+            if (lista) {
+                lista = JSON.parse(lista);
+            } else {
+                lista = [];
             }
-            if (info && resultados) {
-                resultados.textContent = `Valor correspondente: x=${info.Valor.x}, y=${info.Valor.y}`;
-                console.log(`Valor correspondente: x=${info.Valor.x}, y=${info.Valor.y}`);
-            } else if (resultados) {
-                resultados.textContent = 'Valor não encontrado.';
-            }
-        }
-    });
+            lista.push([info.Valor.x, info.Valor.y, missao, tempo, complexidade]);
+            localStorage.setItem(saida, JSON.stringify(lista));
+}
+    } else {
+        console.log('Nenhum botão foi clicado');
+    }
 });
 
 // Desenhar tudo inicialmente
