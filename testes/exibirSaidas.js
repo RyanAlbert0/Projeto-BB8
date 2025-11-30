@@ -36,69 +36,57 @@ document.addEventListener('DOMContentLoaded', () => {
         draw();
     }
 
-function draw(chave) {
-    let cores = localStorage.getItem(chave + 'cor');
-    // desenha a imagem de fundo
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    if (tableImg.complete && tableImg.naturalWidth) {
-        ctx.drawImage(tableImg, 0, 0, canvas.width, canvas.height);
-    } else {
-        ctx.fillStyle = "#fff";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-    }
-
-    // Desenha pontos
-points.forEach((point, i) => {
-    const color = point.color || cores;
-
-    // desenha o círculo
-    ctx.beginPath();
-    ctx.arc(point.x, point.y, 7, 0, 2 * Math.PI);
-    ctx.fillStyle = color;
-    ctx.fill();
-
-    // configura fonte
-    ctx.font = "bold 30px Arial";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-
-    const texto = point.nome ? String(point.nome) : `P${i+1}`;
-    const tx = point.x + 10;
-    const ty = point.y - 20;
-
-    // texto preenchido
-    ctx.fillStyle = cores;
-    ctx.fillText(texto, tx, ty);
-
-    // borda do texto
-    ctx.lineWidth = 2;              // espessura da borda
-    ctx.strokeStyle = "black";      // cor da borda
-    ctx.strokeText(texto, tx, ty);
-});
-
-    // Desenha linha na ordem de seleção
-    if (selectionOrder.length >= 2) {
-        ctx.beginPath();
-        ctx.moveTo(points[selectionOrder[0]].x, points[selectionOrder[0]].y);
-        for (let i = 1; i < selectionOrder.length; i++) {
-            const p = points[selectionOrder[i]];
-            ctx.lineTo(p.x, p.y);
+    function draw() {
+        // desenha a imagem de fundo
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        if (tableImg.complete && tableImg.naturalWidth) {
+            ctx.drawImage(tableImg, 0, 0, canvas.width, canvas.height);
+        } else {
+            // se imagem não estiver pronta, fundo branco
+            ctx.fillStyle = "#fff";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
         }
-        ctx.strokeStyle = points[0].color || cores; // usa cor do primeiro ponto
-        ctx.lineWidth = 6;
-        ctx.stroke();
-    } else if (points.length >= 2) {
-        // Fallback: liga os pontos na ordem do array
-        ctx.beginPath();
-        ctx.moveTo(points[0].x, points[0].y);
-        for (let i = 1; i < points.length; i++) {
-            ctx.lineTo(points[i].x, points[i].y);
+
+        // Desenha pontos
+        points.forEach((point, i) => {
+            const color = point.color || '#FF3366';
+            ctx.beginPath();
+            ctx.arc(point.x, point.y, 7, 0, 2 * Math.PI);
+            ctx.fillStyle = color;
+            ctx.fill();
+
+            ctx.font = "bold 25px Arial";
+            ctx.fillStyle = "#222";
+            ctx.textAlign = "center";     // centraliza horizontalmente
+            ctx.textBaseline = "middle";  // centraliza verticalmente
+
+            // Usa o terceiro valor (nome) corretamente, senão cai no P{i+1}
+            ctx.fillText(point.nome ? String(point.nome) : `P${i+1}`, point.x + 10, point.y - 10);
+        });
+
+        // Desenha linha na ordem de seleção (mantém sua lógica)
+        if (selectionOrder.length >= 2) {
+            ctx.beginPath();
+            ctx.moveTo(points[selectionOrder[0]].x, points[selectionOrder[0]].y);
+            for (let i = 1; i < selectionOrder.length; i++) {
+                const p = points[selectionOrder[i]];
+                ctx.lineTo(p.x, p.y);
+            }
+            ctx.strokeStyle = 'black';
+            ctx.lineWidth = 6;
+            ctx.stroke();
+        } else if (points.length >= 2) {
+            // Fallback: se não há seleção manual, liga os pontos na ordem do array
+            ctx.beginPath();
+            ctx.moveTo(points[0].x, points[0].y);
+            for (let i = 1; i < points.length; i++) {
+                ctx.lineTo(points[i].x, points[i].y);
+            }
+            ctx.strokeStyle = 'black';
+            ctx.lineWidth = 2;
+            ctx.stroke();
         }
-        ctx.strokeStyle = points[0].color || cores;
-        ctx.lineWidth = 2;
-        ctx.stroke();
     }
-}
 
     // Se a imagem já estiver carregada, prepara canvas; senão espera o load
     if (tableImg.complete && tableImg.naturalWidth) {
@@ -136,7 +124,6 @@ points.forEach((point, i) => {
 
         // Atualiza pontos a partir do localStorage
         points.length = 0;
-        let cores = localStorage.getItem(chave + 'cor');
         data.forEach(([x, y, nome, tempo, outro]) => {
             points.push({
                 x: Number(x),                 // garante número
@@ -144,7 +131,7 @@ points.forEach((point, i) => {
                 nome: nome !== undefined ? nome : `P${points.length + 1}`, // usa o terceiro valor
                 tempo: Number(tempo) || 0,
                 outro: Number(outro) || 0,
-                color: cores
+                color: '#FF3366'
             });
         });
 
@@ -160,18 +147,13 @@ points.forEach((point, i) => {
 
     // Preencher o select com todas as chaves do localStorage
     if (exitsSelect) {
-    // Preencher o select com todas as chaves do localStorage, exceto i18nextLng
-    for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-
-        // pula a chave de idioma do i18next
-        if (key === "i18nextLng" || key.includes('cor') ) continue;
-
-        const option = document.createElement("option");
-        option.value = key;
-        option.textContent = key;
-        exitsSelect.appendChild(option);
-}
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            const option = document.createElement("option");
+            option.value = key;
+            option.textContent = key;
+            exitsSelect.appendChild(option);
+        }
 
         // Atualizar métricas ao trocar de cenário
         exitsSelect.addEventListener("change", e => {

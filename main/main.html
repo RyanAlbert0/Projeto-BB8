@@ -9,6 +9,7 @@
 </head>
 <body>
     <div id="title">
+        <button onclick="window.location.href = '../login/index.html'" id="home"><img src="../props/home.png" width="50" height="50"></button>
         <h1>BB8: Archaeologist</h1>
         <img src="../login/sesi-logo-14.png" id="logoSESI">
     </div>
@@ -31,6 +32,7 @@
                 }
                 else if(exit){
                     localStorage.removeItem(exit)
+                    localStorage.removeItem(exit + 'cor')
                 }
                 else{
                     window.alert('Impossível realizar a limpeza: Nome inválido inserido')
@@ -43,6 +45,8 @@
             <input type="text" id="mission" placeholder="Insira o nome da missão">
             <input type="number" id="time" placeholder="Insira o tempo">
             <input type="number" id="hurdle" placeholder="Insira a complexidade">
+            <label for="colorPicker">Cor da Saída:</label>
+            <input type="color" id="colorPicker" value="#FF3366">
             <!-- <input type="text" id="resultados" placeholder=""> -->
             <button onclick="cleanStorage()">Limpar</button>
             <input type="checkbox" id="cleanAll">

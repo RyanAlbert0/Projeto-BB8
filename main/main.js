@@ -4,6 +4,7 @@ const textoElemento = document.getElementById('resultados');
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 
+
 // Configurando as dimensões do canvas
 canvas.width = 1920;
 canvas.height = 1080;
@@ -136,6 +137,14 @@ canvas.addEventListener('click', function(event) {
             }
             lista.push([info.Valor.x, info.Valor.y, missao, tempo, complexidade]);
             localStorage.setItem(saida, JSON.stringify(lista));
+            if(!localStorage.getItem(saida + 'cor')){
+                let color = document.getElementById('colorPicker').value
+                localStorage.setItem(saida + 'cor', color)
+            }
+            else
+            {
+                window.alert('Cor já selecionada!')
+            }
 }
     } else {
         console.log('Nenhum botão foi clicado');
