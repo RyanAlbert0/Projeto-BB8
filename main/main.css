@@ -48,12 +48,11 @@ body {
     width: 40%;
     height: auto;
     padding: 20px; /* mais espaço interno */
-    margin-top: 12%;
 
 }
 
 /* Estiliza todos os inputs e select dentro de #inputs */
-#inputs input[type="number"]{   
+#inputs input, #exit, #mission[type="number"]{   
     width: 80%;
     height: 40px;
     margin: 8px 0;
@@ -170,7 +169,7 @@ body {
     position: absolute;
     bottom: 10px;
     right: 10px;
-    width: 20%; /* Ajuste o tamanho conforme necessário */
+    width: 15%; /* Ajuste o tamanho conforme necessário */
     height: auto;
     z-index: 10; /* Garante que a imagem fique acima de outros elementos */
 }
@@ -183,4 +182,18 @@ body {
 #inputs input[type="number"]::-webkit-outer-spin-button{
 
     -webkit-appearance: none;
+}
+#home {
+    background: none;
+    position: absolute;
+    margin-right: 90%;
+    border: none;
+
+}
+#clear{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 70px;
 }

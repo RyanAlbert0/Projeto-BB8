@@ -47,8 +47,8 @@ body {
     justify-content: flex-start;
     width: 40%;
     height: auto;
-    padding: 20px; /* mais espaço interno */
-    margin-top: 6%;
+    padding: 12px; /* espaço interno reduzido */
+    margin-top: 1%; /* menor recuo superior para subir as caixas */
 }
 
 /* Estiliza todos os inputs e select dentro de #inputs */
