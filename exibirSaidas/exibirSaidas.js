@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const hurdleEl = document.getElementById('hurdle');
     const selectorEl = document.getElementById('exit');
 
+    const azul = {x: 1760, y: 140}
+    const verm = {x: 150, y: 140}
+
     if (addButton) {
         addButton.addEventListener('click', () => {
             const time = Number(timeEl?.value) || 0;

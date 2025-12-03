@@ -5,6 +5,42 @@ const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 
 
+
+
+// Desmarcar radios
+document.querySelectorAll('input[name="In"]').forEach(radio => {
+    radio.addEventListener("click", function() {
+        // Se já estava marcado, desmarca
+        if (this.checked && this.dataset.wasChecked === "true") {
+            this.checked = false;
+            this.dataset.wasChecked = "false";
+        } else {
+            // Marca e registra que foi clicado
+            document.querySelectorAll('input[name="In"]').forEach(r => r.dataset.wasChecked = "false");
+            this.dataset.wasChecked = "true";
+        }
+    });
+});
+document.querySelectorAll('input[name="Out"]').forEach(radio => {
+    radio.addEventListener("click", function() {
+        // Se já estava marcado, desmarca
+        if (this.checked && this.dataset.wasChecked === "true") {
+            this.checked = false;
+            this.dataset.wasChecked = "false";
+        } else {
+            // Marca e registra que foi clicado
+            document.querySelectorAll('input[name="Out"]').forEach(r => r.dataset.wasChecked = "false");
+            this.dataset.wasChecked = "true";
+        }
+    });
+});
+
+
+
+
+    
+
+
 // Configurando as dimensões do canvas
 canvas.width = 1920;
 canvas.height = 1080;
@@ -43,9 +79,12 @@ const valores = [
     {"Pos":9, "Valor":{x: 1280, y: 50}},
     {"Pos":10, "Valor":{x: 1530, y: 60}},
     {"Pos":11, "Valor":{x: 1780, y: 140}},
-    {"Pos":12, "Valor":{x: 1830, y: 450}}
-  
+    {"Pos":12, "Valor":{x: 1830, y: 450}},  
   ];
+
+// Posição Vermelho e Azul (ponto de entrada e saída)
+
+
 
 // Função para desenhar um botão
 function drawButton(button) {
@@ -125,6 +164,42 @@ canvas.addEventListener('click', function(event) {
         clickedButton.selected = true;
         drawAll();
 
+        // Identificação do In/Out
+        const InSelected = document.querySelector('input[name="In"]:checked')
+        const InEl = InSelected ? InSelected.value : ''
+
+        const OutSelected = document.querySelector('input[name="Out"]:checked')
+
+        // Se OutSelected == True -> OutSelected.value
+        // Se OutSelected == False -> ''
+        const OutEl = OutSelected ? OutSelected.value : ''
+
+        if(InEl === 'blue'){
+            In = azul
+            console.log('In Azul')
+        }
+        else if(InEl === 'red'){
+            In = verm
+            console.log('In Vermelho')
+        }
+        else{
+            In = null
+            console.log('Nulo')
+        }
+
+        if(OutEl === 'blue'){
+            Out = azul
+            console.log('Out Azul')
+        }
+        else if(OutEl === 'red'){
+            Out = verm
+            console.log('Out Vermelho')
+        }
+        else{
+            Out = null
+                console.log('Null')
+        }
+
         console.log('Botão clicado:', clickedButton.text);
 
         const info = valores.find(v => String(v.Pos) === String(clickedButton.text).trim());
@@ -135,7 +210,7 @@ canvas.addEventListener('click', function(event) {
             } else {
                 lista = [];
             }
-            lista.push([info.Valor.x, info.Valor.y, missao, tempo, complexidade]);
+            lista.push([info.Valor.x, info.Valor.y, missao, tempo, complexidade, In, Out]);
             localStorage.setItem(saida, JSON.stringify(lista));
             if(!localStorage.getItem(saida + 'cor')){
                 let color = document.getElementById('colorPicker').value
@@ -158,4 +233,7 @@ if (img && img.complete && img.naturalWidth) {
 } else if (img) {
     img.addEventListener('load', drawAll);
 }
+
+
+
 });
