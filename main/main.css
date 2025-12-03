@@ -1,7 +1,6 @@
 /* Fontes */
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:opsz@8..144&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
 body {
 
     font-family: 'Roboto Serif', serif;
@@ -197,4 +196,3 @@ body {
     justify-content: center;
     gap: 70px;
 }
-
