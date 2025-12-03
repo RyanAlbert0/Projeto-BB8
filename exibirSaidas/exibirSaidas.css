@@ -156,3 +156,11 @@ body {
     font-size: 16px; /* texto maior */
     transition: all 0.2s ease; /* suaviza transições */
 }
+
+#home {
+    background: none;
+    position: absolute;
+    margin-right: 90%;
+    border: none;
+
+}
