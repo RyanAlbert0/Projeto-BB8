@@ -20,7 +20,7 @@
                  id agora é "table" conforme solicitado -->
             <img src="table.jpg" id="table" style="display:none">
         </div>
-        <div id="4">
+        <div id="separatorA" class="selectorbox">
             <canvas id="canvas" width="1920" height="1080"></canvas>
             <img src="../main/imagembb8.png" id="bb8Image" alt="Imagem do BB8">
             <div id="entrances">
@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-        <div id="inputs">
+        <div id="inputs" class="selectorbox">
             <input type="text" id="exit" placeholder="Insira o nome da saída">
             <input type="text" id="mission" placeholder="Insira o nome da missão">
             <input type="number" id="time" placeholder="Insira o tempo">
@@ -41,9 +41,9 @@
             <input type="color" id="colorPicker" value="#FF3366">
             <!-- <input type="text" id="resultados" placeholder=""> -->
             
-            <div id="clear"><button onclick="removeExit()">Limpar Saída</button><button onclick="removeAll()">Limpar Tudo</button>
-            <a href="../exibirSaidas/exibirSaidas.html"> Exibir Saídas</a> 
-        </div>
+            <div id="clear"><button id="mainbuttons" onclick="removeExit()">Limpar Saída</button><button id="mainbuttons" onclick="removeAll()">Limpar Tudo</button>        </div>
+            <button onclick='window.location.href = "../exibirSaidas/exibirSaidas.html"'> Exibir Saídas</a> 
+
         <script>
             // Função para limpar o Storage
             function removeExit(){
@@ -55,6 +55,7 @@
                         window.alert(`A saída ${exit} foi excluída com sucesso!`)
                         localStorage.removeItem(exit)
                         localStorage.removeItem(exit + 'cor')
+                        localStorage.removeItem(exit + 'InOut')
                     }
             }
 

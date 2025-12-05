@@ -1,33 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const addButton = document.getElementById('addButton');
-    const timeEl = document.getElementById('time');
-    const hurdleEl = document.getElementById('hurdle');
-    const selectorEl = document.getElementById('exit');
-
-    const azul = {x: 1760, y: 140}
-    const verm = {x: 150, y: 140}
-
-    if (addButton) {
-        addButton.addEventListener('click', () => {
-            const time = Number(timeEl?.value) || 0;
-            const hurdle = Number(hurdleEl?.value) || 0;
-            const selector = Number(selectorEl?.value) || 0;
-            const media = (time + hurdle + selector) / 3;
-            window.alert(`Média das notas: ${media.toFixed(2)}`);
-        });
-    }
-
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
+
+    const verm = {x:150, y:950, nome: " "};
+    const azul = {x:1760, y:950, nome: " "};
+
 
     // elemento da imagem (id "table") que será desenhada no canvas
     const tableImg = document.getElementById('table');
 
     // Pontos (serão alimentados via localStorage)
     const points = [];
-
-    // Mantida a referência e lógica existente
-    const controlsDiv = document.getElementById('controls');
 
     // guarda a ordem em que os pontos foram selecionados
     const selectionOrder = [];
@@ -51,7 +34,7 @@ function draw(chave) {
     }
 
     // Desenha pontos
-points.forEach((point, i) => {
+    points.forEach((point, i) => {
     const color = point.color || cores;
 
     // desenha o círculo
@@ -79,6 +62,7 @@ points.forEach((point, i) => {
     ctx.strokeText(texto, tx, ty);
 });
 
+    
     // Desenha linha na ordem de seleção
     if (selectionOrder.length >= 2) {
         ctx.beginPath();
@@ -127,39 +111,31 @@ points.forEach((point, i) => {
     }
 
     function atualizarMetricas(chave) {
-        const data = JSON.parse(localStorage.getItem(chave));
-        if (!data) return;
+    const data = JSON.parse(localStorage.getItem(chave));
+    if (!data) return;
 
-        // Calcula métricas
-        const somaTempo = calcularSomaTempo(data);
-        const mediaComplex = calcularMediaComplexidade(data);
+    // monta pontos
+    points.length = 0;
+    let cores = localStorage.getItem(chave + 'cor');
+    data.forEach(([x,y,nome,tempo,outro]) => {
+        points.push({ x:Number(x), y:Number(y), nome:nome||`P${points.length+1}`, tempo:Number(tempo)||0, outro:Number(outro)||0, color:cores });
+    });
 
-        if (tempoTotalDiv) tempoTotalDiv.textContent = "Tempo total: " + somaTempo;
-        if (complexidadeMediaDiv) complexidadeMediaDiv.textContent = "Média de complexidade: " + mediaComplex;
+    // adiciona entrada/saída ANTES de recalcular selectionOrder
+    const InOut = JSON.parse(localStorage.getItem(chave + 'InOut')) || [];
+    if (InOut[0] === "verm") points.unshift({ ...verm, color:"green", tipo:"entrada" });
+    else if (InOut[0] === "azul") points.unshift({ ...azul, color:"green", tipo:"entrada" });
 
-        // Atualiza pontos a partir do localStorage
-        points.length = 0;
-        let cores = localStorage.getItem(chave + 'cor');
-        data.forEach(([x, y, nome, tempo, outro]) => {
-            points.push({
-                x: Number(x),                 // garante número
-                y: Number(y),                 // garante número
-                nome: nome !== undefined ? nome : `P${points.length + 1}`, // usa o terceiro valor
-                tempo: Number(tempo) || 0,
-                outro: Number(outro) || 0,
-                color: cores
-            });
-        });
+    if (InOut[1] === "verm") points.push({ ...verm, color:"red", tipo:"saida" });
+    else if (InOut[1] === "azul") points.push({ ...azul, color:"red", tipo:"saida" });
 
-        // Preenche automaticamente a ordem de seleção para permitir traçado,
-        // sem depender de checkboxes
-        selectionOrder.length = 0;
-        for (let i = 0; i < points.length; i++) {
-            selectionOrder.push(i);
-        }
+    // agora sim recalcula ordem
+    selectionOrder.length = 0;
+    for (let i=0; i<points.length; i++) selectionOrder.push(i);
 
-        draw();
+    draw(chave);
     }
+
 
     // Preencher o select com todas as chaves do localStorage
     if (exitsSelect) {
@@ -168,7 +144,7 @@ points.forEach((point, i) => {
         const key = localStorage.key(i);
 
         // pula a chave de idioma do i18next
-        if (key === "i18nextLng" || key.includes('cor') ) continue;
+        if (key === "i18nextLng" || key.includes('cor') || key.includes('InOut') ) continue;
 
         const option = document.createElement("option");
         option.value = key;

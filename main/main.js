@@ -45,9 +45,6 @@ document.querySelectorAll('input[name="Out"]').forEach(radio => {
 canvas.width = 1920;
 canvas.height = 1080;
 
-// Variável para rastrear o botão selecionado
-let selectedButton = null;
-
 const cor = "#ffcb59ff";
 const corSelec = "#ffae00ff";
 
@@ -175,11 +172,11 @@ canvas.addEventListener('click', function(event) {
         const OutEl = OutSelected ? OutSelected.value : ''
 
         if(InEl === 'blue'){
-            In = azul
+            In = 'azul'
             console.log('In Azul')
         }
         else if(InEl === 'red'){
-            In = verm
+            In = 'verm'
             console.log('In Vermelho')
         }
         else{
@@ -188,11 +185,11 @@ canvas.addEventListener('click', function(event) {
         }
 
         if(OutEl === 'blue'){
-            Out = azul
+            Out = 'azul'
             console.log('Out Azul')
         }
         else if(OutEl === 'red'){
-            Out = verm
+            Out = 'verm'
             console.log('Out Vermelho')
         }
         else{
@@ -210,7 +207,7 @@ canvas.addEventListener('click', function(event) {
             } else {
                 lista = [];
             }
-            lista.push([info.Valor.x, info.Valor.y, missao, tempo, complexidade, In, Out]);
+            lista.push([info.Valor.x, info.Valor.y, missao, tempo, complexidade]);
             localStorage.setItem(saida, JSON.stringify(lista));
             if(!localStorage.getItem(saida + 'cor')){
                 let color = document.getElementById('colorPicker').value
@@ -219,6 +216,10 @@ canvas.addEventListener('click', function(event) {
             else
             {
                 window.alert('Cor já selecionada!')
+            }
+            if(!localStorage.getItem(saida + 'InOut')){
+                InOut = [In, Out]
+                localStorage.setItem(saida + 'InOut', JSON.stringify(InOut))
             }
 }
     } else {
