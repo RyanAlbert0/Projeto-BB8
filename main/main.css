@@ -311,5 +311,41 @@ input[type="color"]::-webkit-color-swatch {
     cursor: pointer;
     transition: background-color 0.2s;
     font-family:sans-serif; 
+}
 
+/* Colorir rádios por value (blue/red) e destacar quando selecionados */
+input[type="radio"][value="blue"] {
+    accent-color: #2196F3; /* cor do controle em navegadores que suportam */
+}
+
+input[type="radio"][value="red"] {
+    accent-color: #f44336;
+    transform: scale(1.15);
+}
+
+/* Sutil destaque ao redor do rádio quando estiver selecionado */
+input[type="radio"][value="blue"]:checked {
+    box-shadow: 0 0 0 6px rgba(33,150,243,0.12);
+}
+
+input[type="radio"][value="red"]:checked {
+    box-shadow: 0 0 0 6px rgba(244,67,54,0.12);
+}
+
+/* Aumenta a área clicável visualmente sem alterar layout */
+input[type="radio"] {
+    margin: 0 6px;
+}
+
+/* Estiliza o label associado quando o rádio está selecionado (input + label) */
+input[type="radio"][value="blue"]:checked + label.blue-label,
+input[type="radio"][value="blue"]:checked + label.radio-label.blue-label {
+    color: #2196F3;
+    font-weight: 700;
+}
+
+input[type="radio"][value="red"]:checked + label.red-label,
+input[type="radio"][value="red"]:checked + label.radio-label.red-label {
+    color: #f44336;
+    font-weight: 700;
 }
