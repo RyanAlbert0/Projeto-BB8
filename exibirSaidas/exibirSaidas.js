@@ -95,8 +95,8 @@ function draw(chave) {
     }
 
     // Referências aos elementos extras
-    const tempoTotalDiv = document.getElementById('tempoTotal');
-    const complexidadeMediaDiv = document.getElementById('complexidadeMedia');
+    const tempoTotal = document.getElementById('tempoTotal');
+    const complexidadeMedia = document.getElementById('complexidadeMedia');
     const exitsSelect = document.getElementById('exits');
 
     // Funções de cálculo
@@ -132,8 +132,11 @@ function draw(chave) {
     // agora sim recalcula ordem
     selectionOrder.length = 0;
     for (let i=0; i<points.length; i++) selectionOrder.push(i);
-
+    
     draw(chave);
+    tempoTotal.textContent ='Tempo total das missões: ' + calcularSomaTempo(data)
+    complexidadeMedia.textContent ='Média de complexidade: ' + calcularMediaComplexidade(data)
+
     }
 
 
@@ -164,6 +167,7 @@ function draw(chave) {
         }
         if (exitsSelect.value) {
             atualizarMetricas(exitsSelect.value);
+
         }
     }
 });
