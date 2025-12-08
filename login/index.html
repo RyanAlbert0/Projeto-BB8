@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BB8: Archaeologist</title>
+    <title>Acessar: BB8 - Archaeologist</title>
+    <link rel="icon" type="image/x-icon" href="https://tse1.mm.bing.net/th/id/OIP.pPe5LKE6erJKw5LTvxAfbQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3">
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
@@ -38,20 +39,20 @@
         // Identificar elementos
 
         function access() {
-            // const user = document.getElementById('user').value;
-            // const token = document.getElementById('token').value;
+            const user = document.getElementById('user').value;
+            const token = document.getElementById('token').value;
 
-            // // Credenciais fixas para exemplo
-            // const validUser = 'admin';
-            // const validToken = '123456';
+            // Credenciais fixas para exemplo
+            const validUser = 'admin';
+            const validToken = '123456';
 
-            // if (user === validUser && token === validToken) {
-            //     // Redirecionar para a página principal
+            if (user === validUser && token === validToken) {
+                // Redirecionar para a página principal
                 window.location.href = '../main/main.html';
-            // } else {
-            //     alert('Usuário ou senha incorretos!');
-            //     window.location.reload();
-            // }
+            } else {
+                alert('Usuário ou senha incorretos!');
+                window.location.reload();
+            }
         }
         
 

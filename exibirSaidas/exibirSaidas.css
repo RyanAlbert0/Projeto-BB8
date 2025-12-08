@@ -164,3 +164,34 @@ body {
     border: none;
 
 }
+#tempoTotal {
+    font-family: sans-serif; 
+    background-color: white;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    margin: 10px 0;
+    font-size: 25px;
+    width: 80%;
+    height: 40px;
+    background-color: rgb(255, 123, 0);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#complexidadeMedia{
+    font-family: sans-serif; 
+    background-color: white;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    margin: 10px 0;
+    font-size: 25px;
+    width: 80%;
+    height: 40px;
+    background-color: rgb(255, 123, 0);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

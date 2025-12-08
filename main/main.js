@@ -51,15 +51,15 @@ const corSelec = "#ffae00ff";
 // Array para armazenar os botões
 const buttons = [
     { x: 106, y: 80, width: 60, height: 60, text: "1", normalColor: cor, selectedColor: corSelec, selected: false },
-    { x: 35, y: 370, width: 60, height: 60, text: "2", normalColor: cor, selectedColor: corSelec, selected: false },
-    { x: 600, y: 55, width: 60, height: 60, text: "3", normalColor: cor, selectedColor: corSelec, selected: false },
-    { x: 625, y: 475, width: 60, height: 60, text: "4", normalColor: cor, selectedColor: corSelec, selected: false },
-    { x: 795, y: 950, width: 60, height: 60, text: "5", normalColor: cor, selectedColor: corSelec, selected: false },
+    { x: 30, y: 370, width: 60, height: 60, text: "2", normalColor: cor, selectedColor: corSelec, selected: false },
+    { x: 600, y: 50, width: 60, height: 60, text: "3", normalColor: cor, selectedColor: corSelec, selected: false },
+    { x: 620, y: 470, width: 60, height: 60, text: "4", normalColor: cor, selectedColor: corSelec, selected: false },
+    { x: 787, y: 940, width: 60, height: 60, text: "5", normalColor: cor, selectedColor: corSelec, selected: false },
     { x: 1100, y: 945, width: 60, height: 60, text: "6", normalColor: cor, selectedColor: corSelec, selected: false },
-    { x: 1165, y: 500, width: 60, height: 60, text: "7", normalColor: cor, selectedColor: corSelec, selected: false },
-    { x: 1290, y: 450, width: 60, height: 60, text: "8", normalColor: cor, selectedColor: corSelec, selected: false },
-    { x: 1255, y: 40, width: 60, height: 60, text: "9", normalColor: cor, selectedColor: corSelec, selected: false },
-    { x: 1510, y: 40, width: 60, height: 60, text: "10", normalColor: cor, selectedColor: corSelec, selected: false },
+    { x: 1160, y: 495, width: 60, height: 60, text: "7", normalColor: cor, selectedColor: corSelec, selected: false },
+    { x: 1285, y: 445, width: 60, height: 60, text: "8", normalColor: cor, selectedColor: corSelec, selected: false },
+    { x: 1250, y: 40, width: 60, height: 60, text: "9", normalColor: cor, selectedColor: corSelec, selected: false },
+    { x: 1505, y: 40, width: 60, height: 60, text: "10", normalColor: cor, selectedColor: corSelec, selected: false },
     { x: 1755, y: 110, width: 60, height: 60, text: "11", normalColor: cor, selectedColor: corSelec, selected: false },
     { x: 1800, y: 425, width: 60, height: 60, text: "12", normalColor: cor, selectedColor: corSelec, selected: false }
 ];

@@ -83,7 +83,7 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
-    min-height: 250px;    /* Altura mínima, não ocupa a tela toda */
+    min-height: 100px;    /* Altura mínima, não ocupa a tela toda */
     height: auto;         /* Altura automática conforme o conteúdo */
     margin-top: 0;        /* Remove qualquer margin extra */
     box-sizing: border-box;
@@ -180,6 +180,7 @@ body {
     border: none;
     border-radius: 5px;
     font-size: 30px;
+    margin-top: 20px;
  }
 
 

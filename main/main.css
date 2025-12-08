@@ -84,7 +84,7 @@ body {
 }
 
 /* Estilo para o botão */
-#inputs button,a {
+#exibir {
     width: 30%;
     height: 40px;
     margin: 10px 0;
@@ -170,7 +170,7 @@ body {
     position: absolute;
     bottom: 10px;
     right: 10px;
-    width: 15%; /* Ajuste o tamanho conforme necessário */
+    width: 10%; /* Ajuste o tamanho conforme necessário */
     height: auto;
     z-index: 10; /* Garante que a imagem fique acima de outros elementos */
 }
@@ -208,8 +208,108 @@ body {
 
 }
 
+#entrada{
+    position: absolute;
+    left: 450px;
+    font-family: sans-serif; 
+    background-color: white;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-size: 15px;
+    width: 8%;
+    height: 20px;
+    background-color: rgb(255, 123, 0);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#saida {
+    position: absolute;
+    left: 600px;
+    font-family: sans-serif; 
+    background-color: white;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-size: 15px;
+    width: 8%;
+    height: 20px;
+    background-color: rgb(255, 123, 0);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Colorir rádios por value (blue/red) e destacar quando selecionados */
+input[type="radio"][value="blue"] {
+    accent-color: #2196F3; /* cor do controle em navegadores que suportam */
+    transform: scale(1.15);
+    border-style: solid;
+    border-width: 5px;
+}
+
+input[type="radio"][value="red"] {
+    accent-color: #f44336;
+    transform: scale(1.15);
+}
+
+/* Sutil destaque ao redor do rádio quando estiver selecionado */
+input[type="radio"][value="blue"]:checked {
+    box-shadow: 0 0 0 6px rgba(33,150,243,0.12);
+}
+
+input[type="radio"][value="red"]:checked {
+    box-shadow: 0 0 0 6px rgba(244,67,54,0.12);
+}
+
+/* Aumenta a área clicável visualmente sem alterar layout */
+input[type="radio"] {
+    margin: 0 6px;
+}
+
+/* Estiliza o label associado quando o rádio está selecionado (input + label) */
+input[type="radio"][value="blue"]:checked + label.blue-label,
+input[type="radio"][value="blue"]:checked + label.radio-label.blue-label {
+    color: #2196F3;
+    font-weight: 700;
+}
+
+input[type="radio"][value="red"]:checked + label.red-label,
+input[type="radio"][value="red"]:checked + label.radio-label.red-label {
+    color: #f44336;
+    font-weight: 700;
+}
+
+input[type="color"] {
+  -webkit-appearance: none; /* remove estilo padrão */
+  border: none;
+  width: 100px;   /* controla largura total */
+  height: 100px;  /* controla altura total */
+  padding: 20px;
+  cursor: pointer;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0; /* remove espaço interno */
+}
+
+input[type="color"]::-webkit-color-swatch {
+  border: none; /* remove borda branca */
+}
+
 #mainbuttons{
 
-    
+    width: 125px;
+    height: 40px;
+    margin: 10px 0;
+    background-color: rgb(255, 123, 0);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-family:sans-serif; 
 
 }
