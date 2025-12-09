@@ -215,7 +215,7 @@ canvas.addEventListener('click', function(event) {
             }
             else
             {
-                window.alert('Cor já selecionada!')
+                console.log('Cor já definida');
             }
             if(!localStorage.getItem(saida + 'InOut')){
                 InOut = [In, Out]
