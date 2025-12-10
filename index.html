@@ -5,22 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acessar: BB8 - Archaeologist</title>
     <link rel="icon" type="image/x-icon" href="https://tse1.mm.bing.net/th/id/OIP.pPe5LKE6erJKw5LTvxAfbQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="login/index.css">
 </head>
 <body>
     <!-- Título do Site -->
     <div id="header">
         <h1>BB8: Archaeologist</h1>
-        <img src="sesi-logo-14.png" id="logoSESI">
+        <img src="login/sesi-logo-14.png" id="logoSESI">
     </div>
     <!-- Página de Login -->
     <div id="page">
-        <img src="Logo BB8.jpeg" id="Logobb8">
+        <img src="login/Logo BB8.jpeg" id="Logobb8">
         <!-- Box para a página  -->
         <div id="login">
             <!-- Acesso livre (bypass para a visualização das saídas) -->
             <div id="freeAccess">
-                <a href="../exibirSaidas/exibirSaidas.html" class="hrefStyles" id="freeAccessBTN" >Acessar Saídas</a>
+                <a href="exibirSaidas/exibirSaidas.html" class="hrefStyles" id="freeAccessBTN" >Acessar Saídas</a>
                 <div id="Separator" ></div>
             </div>
             <!-- Acesso para administradores; Adicionar informações -->
@@ -36,6 +36,17 @@
     </div>
 
     <script>
+
+        document.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            if(document.activeElement.tagName == 'INPUT'){
+            access()
+            }
+
+        }
+        });
+
+
         // Identificar elementos
 
         function access() {
@@ -48,7 +59,7 @@
 
             if (user === validUser && token === validToken) {
                 // Redirecionar para a página principal
-                window.location.href = '../main/main.html';
+                window.location.href = 'main/main.html';
             } else {
                 alert('Usuário ou senha incorretos!');
                 window.location.reload();
