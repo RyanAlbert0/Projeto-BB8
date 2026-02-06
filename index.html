@@ -37,6 +37,10 @@
 
     <script>
 
+        window.onload = function() {
+            sessionStorage.setItem('isLogged', false);
+        };
+
         document.addEventListener("keydown", (event) => {
         if (event.key === "Enter") {
             if(document.activeElement.tagName == 'INPUT'){
@@ -60,6 +64,7 @@
             if (user === validUser && token === validToken) {
                 // Redirecionar para a página principal
                 window.location.href = 'main/main.html';
+                sessionStorage.setItem('isLogged', true)
             } else {
                 alert('Usuário ou senha incorretos!');
                 window.location.reload();

@@ -39,10 +39,38 @@
             <!-- Novos elementos para exibir os cálculos -->
             <p id="tempoTotal">Tempo total das missões: 0</p>
             <p id="complexidadeMedia">Média de complexidade: 0</p>
+            <button onclick="acessarEditar()"></button>
         </div>
         </div>
 
         
     </div>
+
+    <script>
+
+        function acessarEditar() {
+
+            const isLogged = sessionStorage.getItem('isLogged')
+            console.log('Tá logado' + isLogged)
+            if (isLogged == true){
+                
+                window.location.href='../editarsaida/editar.html'
+
+            }
+            else
+            {
+                const conf = confirm('Você não está logado! Deseja fazer isso agora?')
+                if(conf){
+                    window.location.href='../index.html'
+                }
+                
+
+            }
+
+
+        }
+
+    </script>
+
 </body>
 </html>
