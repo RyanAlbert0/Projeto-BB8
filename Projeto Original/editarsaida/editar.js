@@ -1,10 +1,94 @@
 let novaPosicao = null;
 
+const valores = [
+    {"Pos":1, "Valor":{x: 126, y: 107}},
+    {"Pos":2, "Valor":{x: 60, y: 400}},
+    {"Pos":3, "Valor":{x: 630, y: 80}},
+    {"Pos":4, "Valor":{x: 650, y: 500}},
+    {"Pos":5, "Valor":{x: 820, y: 975}},
+    {"Pos":6, "Valor":{x: 1150, y: 970}},
+    {"Pos":7, "Valor":{x: 1185, y: 520}},
+    {"Pos":8, "Valor":{x: 1320, y: 475}},
+    {"Pos":9, "Valor":{x: 1280, y: 50}},
+    {"Pos":10, "Valor":{x: 1530, y: 60}},
+    {"Pos":11, "Valor":{x: 1780, y: 140}},
+    {"Pos":12, "Valor":{x: 1830, y: 450}},  
+];
+
+const cor = "#ffcb59ff";
+const corSelec = "rgb(167, 114, 0)";
+
+// Array para armazenar os botões
+const buttons = [
+    { x: 106, y: 80, width: 60, height: 60, text: "1", normalColor: cor, selectedColor: corSelec, selected: false },
+    { x: 30, y: 370, width: 60, height: 60, text: "2", normalColor: cor, selectedColor: corSelec, selected: false },
+    { x: 600, y: 50, width: 60, height: 60, text: "3", normalColor: cor, selectedColor: corSelec, selected: false },
+    { x: 620, y: 470, width: 60, height: 60, text: "4", normalColor: cor, selectedColor: corSelec, selected: false },
+    { x: 787, y: 940, width: 60, height: 60, text: "5", normalColor: cor, selectedColor: corSelec, selected: false },
+    { x: 1100, y: 945, width: 60, height: 60, text: "6", normalColor: cor, selectedColor: corSelec, selected: false },
+    { x: 1160, y: 495, width: 60, height: 60, text: "7", normalColor: cor, selectedColor: corSelec, selected: false },
+    { x: 1285, y: 445, width: 60, height: 60, text: "8", normalColor: cor, selectedColor: corSelec, selected: false },
+    { x: 1250, y: 40, width: 60, height: 60, text: "9", normalColor: cor, selectedColor: corSelec, selected: false },
+    { x: 1505, y: 40, width: 60, height: 60, text: "10", normalColor: cor, selectedColor: corSelec, selected: false },
+    { x: 1755, y: 110, width: 60, height: 60, text: "11", normalColor: cor, selectedColor: corSelec, selected: false },
+    { x: 1800, y: 425, width: 60, height: 60, text: "12", normalColor: cor, selectedColor: corSelec, selected: false }
+];
+
+let canvas, ctx;
+
+// Função para desenhar um botão
+function drawButton(button) {
+    // Define a cor com base no estado de seleção
+    ctx.fillStyle = button.selected ? button.selectedColor : button.normalColor;
+    
+    // Desenha o retângulo arredondado
+    ctx.beginPath();
+    ctx.roundRect(button.x, button.y, button.width, button.height, 100);
+    ctx.fill();
+    
+    ctx.fillStyle = 'black';
+    ctx.font = '20px Arial';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(button.text, button.x + button.width/2, button.y + button.height/2);
+}
+
+// Função para desenhar todos os botões
+function drawButtons() {
+    buttons.forEach(button => drawButton(button));
+}
+
+// Função para verificar se um ponto está dentro de um botão
+function isInsideButton(x, y, button) {
+    return x > button.x && 
+           x < button.x + button.width && 
+           y > button.y && 
+           y < button.y + button.height;
+}
+
+// Função para desenhar a imagem de fundo
+function drawBackground() {
+    const img = document.getElementById('table');
+    if (img && img.complete && img.naturalWidth) {
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    } else {
+        ctx.fillStyle = '#fff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+}
+
+// Função para desenhar tudo
+function drawAll() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawBackground();
+    drawButtons();
+}
+
 document.addEventListener('DOMContentLoaded', function() {
 // Obtendo o canvas e seu contexto
 const textoElemento = document.getElementById('resultados');
-const canvas = document.querySelector('canvas');
-const ctx = canvas.getContext('2d');
+canvas = document.querySelector('canvas');
+ctx = canvas.getContext('2d');
 
 
 
@@ -47,91 +131,10 @@ document.querySelectorAll('input[name="Out"]').forEach(radio => {
 canvas.width = 1920;
 canvas.height = 1080;
 
-const cor = "#ffcb59ff";
-const corSelec = "#ffae00ff";
 
-// Array para armazenar os botões
-const buttons = [
-    { x: 106, y: 80, width: 60, height: 60, text: "1", normalColor: cor, selectedColor: corSelec, selected: false },
-    { x: 30, y: 370, width: 60, height: 60, text: "2", normalColor: cor, selectedColor: corSelec, selected: false },
-    { x: 600, y: 50, width: 60, height: 60, text: "3", normalColor: cor, selectedColor: corSelec, selected: false },
-    { x: 620, y: 470, width: 60, height: 60, text: "4", normalColor: cor, selectedColor: corSelec, selected: false },
-    { x: 787, y: 940, width: 60, height: 60, text: "5", normalColor: cor, selectedColor: corSelec, selected: false },
-    { x: 1100, y: 945, width: 60, height: 60, text: "6", normalColor: cor, selectedColor: corSelec, selected: false },
-    { x: 1160, y: 495, width: 60, height: 60, text: "7", normalColor: cor, selectedColor: corSelec, selected: false },
-    { x: 1285, y: 445, width: 60, height: 60, text: "8", normalColor: cor, selectedColor: corSelec, selected: false },
-    { x: 1250, y: 40, width: 60, height: 60, text: "9", normalColor: cor, selectedColor: corSelec, selected: false },
-    { x: 1505, y: 40, width: 60, height: 60, text: "10", normalColor: cor, selectedColor: corSelec, selected: false },
-    { x: 1755, y: 110, width: 60, height: 60, text: "11", normalColor: cor, selectedColor: corSelec, selected: false },
-    { x: 1800, y: 425, width: 60, height: 60, text: "12", normalColor: cor, selectedColor: corSelec, selected: false }
-];
-
-const valores = [
-    {"Pos":1, "Valor":{x: 126, y: 107}},
-    {"Pos":2, "Valor":{x: 60, y: 400}},
-    {"Pos":3, "Valor":{x: 630, y: 80}},
-    {"Pos":4, "Valor":{x: 650, y: 500}},
-    {"Pos":5, "Valor":{x: 820, y: 975}},
-    {"Pos":6, "Valor":{x: 1150, y: 970}},
-    {"Pos":7, "Valor":{x: 1185, y: 520}},
-    {"Pos":8, "Valor":{x: 1320, y: 475}},
-    {"Pos":9, "Valor":{x: 1280, y: 50}},
-    {"Pos":10, "Valor":{x: 1530, y: 60}},
-    {"Pos":11, "Valor":{x: 1780, y: 140}},
-    {"Pos":12, "Valor":{x: 1830, y: 450}},  
-  ];
 
 // Posição Vermelho e Azul (ponto de entrada e saída)
 
-
-
-// Função para desenhar um botão
-function drawButton(button) {
-    // Define a cor com base no estado de seleção
-    ctx.fillStyle = button.selected ? button.selectedColor : button.normalColor;
-    
-    // Desenha o retângulo arredondado
-    ctx.beginPath();
-    ctx.roundRect(button.x, button.y, button.width, button.height, 100);
-    ctx.fill();
-    
-    ctx.fillStyle = 'white';
-    ctx.font = '20px Arial';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(button.text, button.x + button.width/2, button.y + button.height/2);
-}
-
-// Função para desenhar todos os botões
-function drawButtons() {
-    buttons.forEach(button => drawButton(button));
-}
-
-// Função para verificar se um ponto está dentro de um botão
-function isInsideButton(x, y, button) {
-    return x > button.x && 
-           x < button.x + button.width && 
-           y > button.y && 
-           y < button.y + button.height;
-}
-
-// Função para desenhar a imagem de fundo
-function drawBackground() {
-    const img = document.getElementById('table');
-    if (img && img.complete && img.naturalWidth) {
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-    } else {
-        ctx.fillStyle = '#fff';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-    }
-}
-
-// Função para desenhar tudo
-function drawAll() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawBackground();
-    drawButtons();
-}
 
 // Event listener para cliques no canvas
 canvas.addEventListener('click', function(event) {
@@ -270,6 +273,26 @@ if (img && img.complete && img.naturalWidth) {
             console.log(parametrosFiltrados[0][3]);
             timeParameter.value = parametrosFiltrados[0][3]
             hurdleParameter.value = parametrosFiltrados[0][4]
+            
+            // Encontrar e destacar o botão correspondente à posição armazenada
+            const x_armazenado = parametrosFiltrados[0][0];
+            const y_armazenado = parametrosFiltrados[0][1];
+            
+            // Encontrar a posição que tem estas coordenadas
+            const posicao = valores.find(v => v.Valor.x === x_armazenado && v.Valor.y === y_armazenado);
+            
+            if (posicao) {
+                // Desselecionar todos os botões
+                buttons.forEach(b => b.selected = false);
+                
+                // Selecionar o botão correspondente
+                const botaoCorrespondente = buttons.find(b => b.text === String(posicao.Pos));
+                if (botaoCorrespondente) {
+                    botaoCorrespondente.selected = true;
+                    novaPosicao = [x_armazenado, y_armazenado];
+                    drawAll();
+                }
+            }
     })};
 
 function salvarSaida() {
@@ -300,4 +323,20 @@ function salvarSaida() {
             console.error('Erro ao atualizar os dados:', e);
         }
     }
+}
+
+function apagarPonto() {
+
+    const saida = document.getElementById('exits').value.trim()
+    const missao = document.getElementById('mission').value
+
+    const dados = JSON.parse(localStorage.getItem(saida));
+    if (dados) {
+            const index = dados.findIndex(item => item[2] === missao);
+            dados.splice(index, 1);
+            localStorage.setItem(saida, JSON.stringify(dados));
+            alert("Ponto apagado com sucesso!");
+            window.location.reload();    
+    }
+
 }

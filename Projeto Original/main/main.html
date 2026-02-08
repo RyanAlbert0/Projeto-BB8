@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edição de Saída: BB8 Archaeologist</title>
+    <title>Programar Saídas: BB8 Archaeologist</title>
     <link rel="icon" type="image/x-icon" href="https://tse1.mm.bing.net/th/id/OIP.pPe5LKE6erJKw5LTvxAfbQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3">
-    <script src="editar.js" defer></script>
-    <link rel="stylesheet" href="editar.css">
+    <script src="main.js" defer></script>
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
     <div id="title">
@@ -35,25 +35,46 @@
                             <input id="out-blue" name="Out" value="blue" type="radio"><label for="out-blue" class="radio-label blue-label"></label>
                             <input id="out-red" name="Out" value="red" type="radio"><label for="out-red" class="radio-label red-label"></label>
                 </div>
+                <div>
+                    <button id="togglezoom">Ativar/Desativar Zoom</button>
+                </div>
             </div>
         </div>
         <div id="inputs" class="selectorbox">
-            <select name="" id="exits">
-                <option value="" disabled selected hidden>Selecione uma Saída</option>
-            </select>
-            <select name="" id="mission">
-                <option value="" disabled selected hidden>Selecione uma Missão</option>
-            </select>
-
-            <!-- Ajustar conforme necessário no Front-->
-            <p>Editar informações</p> 
-
-            <label for="">Tempo</label>
+            <input type="text" id="exit" placeholder="Insira o nome da saída">
+            <input type="text" id="mission" placeholder="Insira o nome da missão">
             <input type="number" id="time" placeholder="Insira o tempo">
-            <label for="">Complexidade</label>
             <input type="number" id="hurdle" placeholder="Insira a complexidade">
-            <button id="salvar" onclick="salvarSaida()">Salvar</button>
-            <button id="exibir" onclick="window.location.href = '../exibirSaidas/exibirSaidas.html'">Voltar</button>
+            <label for="colorPicker" id="cores">Cor da Saída:</label>
+            <input type="color" id="colorPicker" value="#FF3366">
+            <!-- <input type="text" id="resultados" placeholder=""> -->
+            
+            <div id="clear"><button id="mainbuttons" onclick="removeExit()">Limpar Saída</button><button id="mainbuttons" onclick="removeAll()">Limpar Tudo</button>        </div>
+            <button id="exibir" onclick='window.location.href = "../exibirSaidas/exibirSaidas.html"'> Exibir Saídas</a> 
+
+        <script>
+            // Função para limpar o Storage
+            function removeExit(){
+                const exit = document.getElementById('exit').value.trim()
+                const remove = `Tem certeza que deseja remover a saída ${exit}? Essa ação não pode ser desfeita!`;
+                const conf = confirm(remove)
+                if(exit)
+                    if(conf){
+                        window.alert(`A saída ${exit} foi excluída com sucesso!`)
+                        localStorage.removeItem(exit)
+                        localStorage.removeItem(exit + 'cor')
+                        localStorage.removeItem(exit + 'InOut')
+                    }
+            }
+
+            function removeAll(){
+                const remove = 'Tem certeza que deseja remover TODAS as saídas? Essa ação não pode ser desfeita!'
+                const conf = confirm(remove)
+                if(conf){
+                    localStorage.clear()
+                }
+            }
+        </script>
     </div>
 </body>
 </html

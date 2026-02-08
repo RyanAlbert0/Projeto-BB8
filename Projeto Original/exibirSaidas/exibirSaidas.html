@@ -26,20 +26,24 @@
 
             <canvas id="canvas" width="400" height="300"></canvas>
         <div id="inputs">
-            <select name="exits" id="exits">
+            <!-- <select name="exits" id="exits">
                 <option value="" disabled selected hidden>Selecione a saída</option>
-            </select>
+            </select> -->
+            <label for="outputsFilter">Filtrar saídas:</label>
+            <input type="text" id="outputsFilter" placeholder="Buscar saída..." style="width:85%; margin:8px 0; padding:8px;">
+            <label for="outputsContainer">Escolher saídas:</label>
+            <div id="outputsContainer" style="width:85%; max-height:200px; overflow:auto; border:none; padding:8px; border-radius:4px;"></div>
             <!-- <label for="colorPicker"><strong>Cor da linha:</strong></label>
             <input type="color" id="colorPicker" value="#000000"> -->
 
-            <script>
-
-            </script>
-
             <!-- Novos elementos para exibir os cálculos -->
-            <p id="tempoTotal">Tempo total das missões: 0</p>
-            <p id="complexidadeMedia">Média de complexidade: 0</p>
-            <button onclick="acessarEditar()"></button>
+            <!-- <p id="tempoTotal">Tempo total das missões: 0</p>
+            <p id="complexidadeMedia">Média de complexidade: 0</p> -->
+            
+            <!-- Contêiner para exibir resultados individuais -->
+            <div id="resultadosContainer" style="margin-top: 20px;"></div>
+            
+            <button onclick="acessarEditar()">Editar Pontos</button>
         </div>
         </div>
 
@@ -52,7 +56,7 @@
 
             const isLogged = sessionStorage.getItem('isLogged')
             console.log('Tá logado' + isLogged)
-            if (isLogged == true){
+            if (isLogged === 'true'){
                 
                 window.location.href='../editarsaida/editar.html'
 
