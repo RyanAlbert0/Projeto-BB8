@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../imagens/icon-bb8.png">
+    <title>Matriz - BB8: Archaeologist</title>
+</head>
+<body>
+    <!-- Página Título -->
+    <div id="header">
+        <button onclick="window.location.href = '../interface/interface.html'" id="home"><img src="../imagens/casa.png" width="50" height="50"></button>
+        <h1>Matriz - BB8: Archaeologist</h1>
+        <img src="../imagens/Logo SESI 2.png" id="logoSESI">
+    </div>
+    <div id="page">
+    <form action="">
+
+            <!-- Cria a tabela com um tamanho de 1600x500 pixels e uma borda tamanho 5 -->
+            <table border="5" width="1600" height="500">
+                <tr>
+                    <!-- Define o título de cada coluna, com o width representando quando da tabela essa coluna vai ocupar -->
+                    <th class="text" style="width: 20%;">Nome</th>
+                    <th class="text" style="width: 20%;">Tempo</th>
+                    <th class="text" style="width: 20%;">Complexidade</th>
+                    <th class="text" style="width: 20%;">Localização</th>
+                    <th class="text" style="width: 5%;">Remover</th>
+                </tr>
+
+                <!-- Primeira Missão -->
+                <tr>
+                    <!-- Input do nome da missão -->
+                    <td><input class="matrizInput" type="text" placeholder="Insira o nome da missão" id="mission1-nome"></td>
+                    
+                    <!-- Input do tempo da missão -->
+                    <td><input class="matrizInput" type="number" placeholder="Insira a nota de tempo" id="mission1-tempo"></td>
+                    
+                    <!-- Input da complexidade da missão -->
+                    <td><input class="matrizInput" type="number" placeholder="Insira a nota de complexidade" id="mission1-complex"></td>
+                    
+                    <!-- Input da posição (por numeração de pontos e não coordenadas) -->
+                    <td>
+                        <!-- Campo onde aparecerá o valor -->
+                        <input class="matrizInput" type="text" placeholder="Clique no botão para definir a posição" id="mission1-position" disabled>
+                        
+                        <!-- Botão que irá levar para a seleção -->
+                        <button class="matrizButton" type="button" id="mission1-posbutton" onclick="canvas(1)">Definir</button>
+                    </td>
+                    
+                    <!-- Permite limpar essa missão do LocalStorage -->
+                    <td><button class="matrizButton" type="button" id="mission1-cleanbutton" onclick="limpar(1)">Limpar</button></td>
+                </tr>
+
+                <!-- Segunda Missão -->
+                <tr>
+                    <!-- Input do nome da missão -->
+                    <td><input class="matrizInput" type="text" placeholder="Insira o nome da missão" id="mission2-nome"></td>
+                    
+                    <!-- Input do tempo da missão -->
+                    <td><input class="matrizInput" type="number" placeholder="Insira a nota de tempo" id="mission2-tempo"></td>
+                    
+                    <!-- Input da complexidade da missão -->
+                    <td><input class="matrizInput" type="number" placeholder="Insira a nota de complexidade" id="mission2-complex"></td>
+                    
+                    <!-- Input da posição (por numeração de pontos e não coordenadas) -->
+                    <td>
+
+                        <!-- Campo onde aparecerá o valor -->
+                        <input class="matrizInput" type="text" placeholder="Clique no botão para definir a posição" id="mission2-position" disabled>
+                        
+                        <!-- Botão que irá levar para a seleção -->
+                        <button type="button" id="mission2-posbutton" onclick="canvas(2)">Definir</button>
+                    </td>             
+                    <!-- Permite limpar essa missão do LocalStorage -->
+                    <td><button class="matrizButton" type="button" id="mission1-cleanbutton" onclick="limpar(2)">Limpar</button></td>   
+                </tr>
+
+                <!-- Terceira Missão -->
+                <tr>
+                    <!-- Input do nome da missão -->
+                    <td><input class="matrizInput" type="text" placeholder="Insira o nome da missão" id="mission3-nome"></td>
+                    
+                    <!-- Input do tempo da missão -->
+                    <td><input class="matrizInput" type="number" placeholder="Insira a nota de tempo" id="mission3-tempo"></td>
+                    
+                    <!-- Input da complexidade da missão -->
+                    <td><input class="matrizInput" type="number" placeholder="Insira a nota de complexidade" id="mission3-complex"></td>
+                    
+                    <!-- Input da posição (por numeração de pontos e não coordenadas) -->
+                    <td>
+                        
+                        <!-- Campo onde aparecerá o valor -->
+                        <input class="matrizInput" type="text" placeholder="Clique no botão para definir a posição" id="mission3-position" disabled>
+                        
+                        <!-- Botão que irá levar para a seleção -->
+                        <button type="button" id="mission3-posbutton" onclick="canvas(3)">Definir</button>
+                        
+                    </td>
+                    <!-- Permite limpar essa missão do LocalStorage -->
+                    <td><button class="matrizButton" type="button" id="mission1-cleanbutton" onclick="limpar(3)">Limpar</button></td>
+                </tr>
+
+                <!-- Quarta Missão -->
+                <tr>
+                    <!-- Input do nome da missão -->
+                    <td><input class="matrizInput" type="text" placeholder="Insira o nome da missão" id="mission4-nome"></td>
+
+                    <!-- Input do tempo da missão -->
+                    <td><input class="matrizInput" type="number" placeholder="Insira a nota de tempo" id="mission4-tempo"></td>
+
+                    <!-- Input da complexidade da missão -->
+                    <td><input class="matrizInput" type="number" placeholder="Insira a nota de complexidade" id="mission4-complex"></td>
+
+                    <!-- Input da posição (por numeração de pontos e não coordenadas) -->
+                    <td>
+
+                        <!-- Campo onde aparecerá o valor -->
+                        <input class="matrizInput" type="text" placeholder="Clique no botão para definir a posição" id="mission4-position" disabled>
+
+                        <!-- Botão que irá levar para a seleção -->
+                        <button type="button" id="mission4-posbutton" onclick="canvas(4)">Definir</button>
+                    </td>
+
+                    <!-- Permite limpar essa missão do LocalStorage -->
+                    <td><button class="matrizButton" type="button" id="mission1-cleanbutton" onclick="limpar(4)">Limpar</button></td>
+                </tr>
+
+                <!-- Quinta Missão -->
+                <tr>
+                    <td><input class="matrizInput" type="text" placeholder="Insira o nome da missão" id="mission5-nome"></td>
+                    <td><input class="matrizInput" type="number" placeholder="Insira a nota de tempo" id="mission5-tempo"></td>
+                    <td><input class="matrizInput" type="number" placeholder="Insira a nota de complexidade" id="mission5-complex"></td>
+                    <td>
+                        <input class="matrizInput" type="text" placeholder="Clique no botão para definir a posição" id="mission5-position" disabled>
+                        <button type="button" id="mission5-posbutton" onclick="canvas(5)">Definir</button>
+                    </td>
+                    <td><button class="matrizButton" type="button" id="mission1-cleanbutton" onclick="limpar(5)">Limpar</button></td>
+                </tr>
+
+                <!-- Sexta Missão -->
+                <tr>
+                    <td><input class="matrizInput" type="text" placeholder="Insira o nome da missão" id="mission6-nome"></td>
+                    <td><input class="matrizInput" type="number" placeholder="Insira a nota de tempo" id="mission6-tempo"></td>
+                    <td><input class="matrizInput" type="number" placeholder="Insira a nota de complexidade" id="mission6-complex"></td>
+                    <td>
+                        <input class="matrizInput" type="text" placeholder="Clique no botão para definir a posição" id="mission6-position" disabled>
+                        <button type="button" id="mission6-posbutton" onclick="canvas(6)">Definir</button>
+                    </td>
+                    <td><button class="matrizButton" type="button" id="mission1-cleanbutton" onclick="limpar(6)">Limpar</button></td>
+                </tr>
+
+                <!-- Sétima Missão -->
+                <tr>
+                    <td><input class="matrizInput" type="text" placeholder="Insira o nome da missão" id="mission7-nome"></td>
+                    <td><input class="matrizInput" type="number" placeholder="Insira a nota de tempo" id="mission7-tempo"></td>
+                    <td><input class="matrizInput" type="number" placeholder="Insira a nota de complexidade" id="mission7-complex"></td>
+                    <td>
+                        <input class="matrizInput" type="text" placeholder="Clique no botão para definir a posição" id="mission7-position" disabled>
+                        <button type="button" id="mission7-posbutton" onclick="canvas(7)">Definir</button>
+                    </td>
+                    <td><button class="matrizButton" type="button" id="mission1-cleanbutton" onclick="limpar(7)">Limpar</button></td>
+                </tr>
+
+                <!-- Oitava Missão -->
+                <tr>
+                    <td><input class="matrizInput" type="text" placeholder="Insira o nome da missão" id="mission8-nome"></td>
+                    <td><input class="matrizInput" type="number" placeholder="Insira a nota de tempo" id="mission8-tempo"></td>
+                    <td><input class="matrizInput" type="number" placeholder="Insira a nota de complexidade" id="mission8-complex"></td>
+                    <td>
+                        <input class="matrizInput" type="text" placeholder="Clique no botão para definir a posição" id="mission8-position" disabled>
+                        <button type="button" id="mission8-posbutton" onclick="canvas(8)">Definir</button>
+                    </td>
+                    <td><button class="matrizButton" type="button" id="mission1-cleanbutton" onclick="limpar(8)">Limpar</button></td>
+                </tr>
+
+                <!-- Nona Missão -->
+                <tr>
+                    <td><input class="matrizInput" type="text" placeholder="Insira o nome da missão" id="mission9-nome"></td>
+                    <td><input class="matrizInput" type="number" placeholder="Insira a nota de tempo" id="mission9-tempo"></td>
+                    <td><input class="matrizInput" type="number" placeholder="Insira a nota de complexidade" id="mission9-complex"></td>
+                    <td>
+                        <input class="matrizInput" type="text" placeholder="Clique no botão para definir a posição" id="mission9-position" disabled>
+                        <button type="button" id="mission9-posbutton" onclick="canvas(9)">Definir</button>
+                    </td>
+                    <td><button class="matrizButton" type="button" id="mission1-cleanbutton" onclick="limpar(9)">Limpar</button></td>
+                </tr>
+
+                <!-- Décima Missão -->
+                <tr>
+                    <td><input class="matrizInput" type="text" placeholder="Insira o nome da missão" id="mission10-nome"></td>
+                    <td><input class="matrizInput" type="number" placeholder="Insira a nota de tempo" id="mission10-tempo"></td>
+                    <td><input class="matrizInput" type="number" placeholder="Insira a nota de complexidade" id="mission10-complex"></td>
+                    <td>
+                        <input class="matrizInput" type="text" placeholder="Clique no botão para definir a posição" id="mission10-position" disabled>
+                        <button type="button" id="mission10-posbutton" onclick="canvas(10)">Definir</button>
+                    </td>
+                    <td><button class="matrizButton" type="button" id="mission1-cleanbutton" onclick="limpar(10)">Limpar</button></td>
+                </tr>
+
+                <!-- Décima Primeira Missão -->
+                <tr>
+                    <td><input class="matrizInput" type="text" placeholder="Insira o nome da missão" id="mission11-nome"></td>
+                    <td><input class="matrizInput" type="number" placeholder="Insira a nota de tempo" id="mission11-tempo"></td>
+                    <td><input class="matrizInput" type="number" placeholder="Insira a nota de complexidade" id="mission11-complex"></td>
+                    <td>
+                        <input class="matrizInput" type="text" placeholder="Clique no botão para definir a posição" id="mission11-position" disabled>
+                        <button type="button" id="mission11-posbutton" onclick="canvas(11)">Definir</button>
+                    </td>
+                    <td><button class="matrizButton" type="button" id="mission1-cleanbutton" onclick="limpar(11)">Limpar</button></td>
+                </tr>
+
+                <!-- Décima Segunda Missão -->
+                <tr>
+                    <td><input class="matrizInput" type="text" placeholder="Insira o nome da missão" id="mission12-nome"></td>
+                    <td><input class="matrizInput" type="number" placeholder="Insira a nota de tempo" id="mission12-tempo"></td>
+                    <td><input class="matrizInput" type="number" placeholder="Insira a nota de complexidade" id="mission12-complex"></td>
+                    <td>
+                        <input class="matrizInput" type="text" placeholder="Clique no botão para definir a posição" id="mission12-position" disabled>
+                        <button type="button" id="mission12-posbutton" onclick="canvas(12)">Definir</button>
+                    </td>                
+                    <td><button class="matrizButton" type="button" id="mission1-cleanbutton" onclick="limpar(12)">Limpar</button></td>
+                </tr>
+            </table>
+            <button type="button" id="atualizar" class="matrizButton" onclick="inserirDados()"></button>
+        </form>
+        <div style="display: none;">
+            <img src="../imagens/table.jpg" id="mesaIMG">
+        </div>
+        <canvas id="mesa" width="1280" height="720" style="border: 1px solid black;"></canvas>
+    </div>
+    
+    
+    <script>
+        
+        // Aqui colocar toda a lógica de trazer as informações
+        let missoes = JSON.parse(localStorage.getItem('missoes'))
+        
+        // Captura o parâmetro de primeiro acesso
+        const primeiroAcesso = localStorage.getItem('primeiroAcesso')
+        console.log(primeiroAcesso)
+        
+        // Define o botão de envio
+        const enviar = document.querySelector('#atualizar')
+
+        // Declara a variável de event listener
+        let eventListenerAtivado = false
+
+        // Declara a variável P a ser usada no Canvas
+        let p = null
+        
+        // Define o objeto Botões para o escopo global, para uso na função canvas() e clique()
+        let botoes = []
+
+        // Define o elemento do Canvas
+        const c = document.getElementById('mesa');
+
+        c.style.display = 'none'
+        
+        // Verifica se é o primeiro acesso
+        if (primeiroAcesso != null)
+        {
+            // Se não for, altera o texto do botão para 'Atualizar Matriz'
+            enviar.textContent = 'Atualizar Matriz'
+            
+            // Executa a função para completar a tabela
+            lerDados()
+        }
+        else
+        {
+            // Caso contrário, altera o texto do botão para 'Definir Matriz'
+            enviar.textContent = 'Definir Matriz'
+        }
+        
+        
+        // Função para ler as informações armazenadas e exibí-las nos respectivos inputs
+        function lerDados() {
+            
+            // Verifica se MISSOES é um dado não nulo
+            if (missoes != null)
+            {
+                
+                // Debug dos dados capturados do LocalStorage
+                console.log(missoes)
+                
+                // Exibe no console cada missão individualmente
+                for (i = 0; i < 12; i++)
+                {
+                    
+                    // Separa as informações de cada missão
+                    let nome = missoes[i][0]
+                    let tempo = missoes[i][1]
+                    let complex = missoes[i][2]
+                    let posicao = missoes[i][3]
+                    
+                    // Debug para os dados identificados
+                    console.log(`Posição: ${i}; Nome: ${nome}; Tempo: ${tempo}; Complex: ${complex}; Posição: ${posicao}`)
+                    
+                    // Identifica os inputs
+                    let nomeInput = document.getElementById(`mission${i+1}-nome`)
+                    let tempoInput = document.getElementById(`mission${i+1}-tempo`)
+                    let complexInput = document.getElementById(`mission${i+1}-complex`)
+                    let posicaoOutput = document.getElementById(`mission${i+1}-position`)
+                    let posicaoButton = document.getElementById(`mission${i+1}-posbutton`)
+                    
+                    // Insere os dados adquiridos do LocalStorage para os Inputs
+                    nomeInput.value = nome
+                    tempoInput.value = tempo
+                    complexInput.value = complex
+                    posicaoOutput.value = posicao
+                    
+                    // Renomeia o botão 'Definir' do posição dinamicamente dependendo se há valores ou não
+                    
+                    if (posicao == '')
+                    {
+                        // Caso estiver vazio (string vazia), renomeia para Definir
+                        posicaoButton.textContent = 'Definir'
+                    }
+                    else
+                    {
+                        // Caso possuir valor, renomeia para Modificar
+                        posicaoButton.textContent = 'Modificar'
+                    }
+                    
+                    
+                }
+            }
+            else
+            {
+                window.alert('Não foi possível encontrar dados!')
+            }
+        }   
+        
+        // Função para que os dados inseridos nos inputs possam ser preparados e armazenados para a leitura futura
+        function inserirDados() {
+            
+            // Define as variáveis necessárias
+            
+            let missoes = []
+            
+            // Coleta as informações que o usuário inseriu nos inputs e salva em um objeto
+            
+            for (i = 1; i < 13; i++)
+            {
+                
+                // Coleta as informações de cada input
+                let nomeInput = document.getElementById(`mission${i}-nome`).value
+                let tempoInput = document.getElementById(`mission${i}-tempo`).value
+                let complexInput = document.getElementById(`mission${i}-complex`).value
+                let posOutput = document.getElementById(`mission${i}-position`).value
+
+                // Debug para verificar os dados
+                console.log(`Input ${i}\nNome: ${nomeInput}; Tempo: ${tempoInput}; Complexidade: ${complexInput}; Posição: ${posOutput}`)
+
+                // Cria o dicionário com todas as informações inseridas
+                let missao = [nomeInput, tempoInput, complexInput, posOutput]
+                
+                // Adiciona esta missão à lista de missões
+                missoes.push(missao)
+            }
+
+            // Debug para a lista de missões
+            console.log(missoes)
+
+            // Envia os dados capturados para o LocalStorage
+            localStorage.setItem('missoes', JSON.stringify(missoes))
+
+            // A estrutura é a seguinte:
+            // key: [[missaoA, tempoA, complexA], [missaoB, tempoB, complexB], [missaoN, tempoN, complexN]]
+
+            // Atualiza a variável primeiroAcesso para qualquer coisa exceto Null (false usado para melhor compreensão)
+            localStorage.setItem('primeiroAcesso', false)
+
+            // Recarrega a página
+            window.location.reload()
+            
+        }
+
+        // Função para limpar a missão
+        function limpar(x)
+        {
+            // Identifica todos os elementos com a posição x (ex: 4)
+            let nomeInput = document.getElementById(`mission${x}-nome`)
+            let tempoInput = document.getElementById(`mission${x}-tempo`)
+            let complexInput = document.getElementById(`mission${x}-complex`)
+            let posicaoOutput = document.getElementById(`mission${x}-position`)
+
+            // Define a mensagem para a confirmação
+            msg = `
+                Atenção!\n
+                Você deseja redefinir essa missão?\n
+                Essa ação é permanente!\n
+            `
+
+            // Envia a mensagem e recebe a confirmação do usuário
+            conf = confirm(msg)
+
+            // Verifica a confirmação do usuário
+            if (conf == true)
+            {
+                // Caso positivo, envie uma mensagem para o usuário alertando que a ação foi realizada
+                window.alert(`A missão de nome ${nomeInput.value} de posição ${x} foi redefinida`) 
+
+                // Limpa do LocalStorage
+                
+                // Verifica se MISSÕES não é nulo
+                if (missoes != null)
+                {
+                    // Se não for, inicia a lógica de remoção
+
+                    // Declara os inputs (letras altas usadas para facilitar no uso)
+                    let a = document.getElementById(`mission${x}-nome`)
+                    let b = document.getElementById(`mission${x}-tempo`)
+                    let c = document.getElementById(`mission${x}-complex`)
+                    let d = document.getElementById(`mission${x}-position`)
+                    let e = document.getElementById(`mission${x}-posbutton`)
+                    
+                    // Executa a limpeza
+                    
+                    // Limpa os campos
+                    a.value = ''
+                    b.value = ''
+                    c.value = ''
+                    d.value = ''
+                    e.textContent = 'Definir'
+
+                    missaoExcluida = missoes[x-1]
+
+                    // Debug de missão
+                    console.log(`A missão selecionada foi ${x}`)
+
+                    // Atualiza cada parâmetro para um valor limpo
+                    for (i = 0; i < 4; i++)
+                    {
+                        missaoExcluida[i] = ''
+                    }
+
+                    // Atualiza a missão excluída
+                    missoes[x-1] = missaoExcluida                    
+
+                    // Envia para o LocalStorage
+                    localStorage.setItem('missoes', JSON.stringify(missoes))
+
+                }
+            }
+        }
+
+        // Função para realizar todas as operações de renderização do Canvas
+        function canvas(pos) 
+        {
+
+            // Atualiza a variável P para a missão escolhida
+            p = pos
+
+            // Define o Canvas como 2D
+            const ctx = c.getContext('2d');
+            // Mostra o canvas
+            c.style.display = 'block';
+
+            let coordenadas = JSON.parse(sessionStorage.getItem('coordenadas'))
+
+
+
+
+            /* 
+            Para se traçar uma reta, basta usar o seguinte código:
+
+            1. ctx.moveTo(0,0) -> Move o cursor do Canvas para a posição x = 0 e y = 0;
+            2. ctx.lineTo(200,200) -> Cria um traçado que parte do cursor 0,0 até o ponto x = 200 e y = 200;
+            3. ctx.stroke() -> Gera a parte gráfica da linha;
+
+            Para se traçar uma circuncerência, basta usar o seguinte código:
+
+            1. ctx.beginPath() -> Ativa a função para iniciar o arco
+            2. ctx.arc(1005, 50, 40, 0, 2 * Math.PI) -> Traça o trajeto do círculo;
+            *  ctx.arc(POSx, POSy, Raio, PontoFinal, Radiano)
+            3. ctx.stroke() -> Gera a parte gráfica da linha
+
+            Para se colorir/alterar a espessua uma linha:
+
+            1. ctx.strokeStyle = color -> Define a linha com uma cor customizada
+
+            1. ctx.lineWidth = x -> Define uma espessura para a linha
+            
+            Para se colorir o interior de uma circunferência:
+
+            1. ctx.fillStyle = color -> Define o interior com uma cor personalizada
+            2. ctx.fill() -> Preenche a circunferência
+
+            Para se inserir uma imagem ao fundo do Canvas:
+
+            img = document.getElementById(imageId)
+            ctx.drawImage(img, w, h)
+
+            Para desenhar um texto:
+
+            1. ctx.font = '<tamanho>px <Fonte>'
+            2. ctx.fillText(mensagem, x, y) | ctx.strokeText(mensagem, x, y)
+            3. ctx.fillStyle = cor
+            4. ctx.strokeStyle = cor
+            5. ctx.textAlign = center|start|end|left|right
+            
+            */
+
+            // Carrega a imagem no Canvas
+            const img = document.getElementById('mesaIMG')
+
+            // Verifica executa se a imagem estiver carregada
+            if(img.complete)
+            {
+                // Define a imagem do Canvas nas posições x = 0 e y = 0, com uma largura x = 1280 e altura y = 720
+                ctx.drawImage(img, 0, 0, 1280, 720)
+            }
+
+            // Cria os círculos segundo uma tabela de coordenadas
+            for (i = 1; i < 13; i++)
+            {
+
+                // Pega as coordenadas com base na contagem 'i'
+                let x = coordenadas[i][0]
+                let y = coordenadas[i][1]
+
+                // Debug dos resultados das coordenadas
+                // console.log(`Index: ${i}; X: ${x}; Y: ${y}`)
+                
+                // Desenha o círculo para a coordenada atual
+                ctx.beginPath()
+                ctx.arc(x, y, 10, 0, 2 * Math.PI)
+                ctx.fillStyle = 'orange'
+                ctx.fill()
+                ctx.strokeStyle = 'orange'
+                ctx.stroke()
+
+                // Desenha um texto para a coordenada atual acima do círculo
+                ctx.font = '30px Arial'
+                ctx.textAlign = 'center'
+                ctx.fillText(i, x, y + 40)
+
+                // Salva as informaçõoes de coordenada, diâmetro e nome do botão
+                let botao = {'x': x, 'y': y, 'size': 20, 'nome': i}
+
+                // Envia para o Array Botões
+                botoes.push(botao)
+
+                // // Debug para identificar possíveis falhas no dicionário e no array
+                // console.dir('Botão: ' + JSON.stringify(botao))
+                // console.log('Lista atualizada com o índice ' + i + ': ' + JSON.stringify(botoes) + '\n')
+
+            }
+
+            // Detecta o clique do usuário
+            clique()
+
+            }
+        
+        // Função para realizar todas as operações de detecção de clique do Canvas
+        function clique() 
+        {
+
+            // Resetar o output
+            let output = null
+
+            // Declarar o Canvas
+            const canvas = document.getElementById('mesa')
+
+
+
+            // Aplicar o detector de clique ao Canvas
+            if (eventListenerAtivado == false)
+            {
+            canvas.addEventListener('click', function(event) {
+
+                // Define o tamanho do Canvas e a posição
+                const rect = canvas.getBoundingClientRect()
+
+                // Define a posição X e Y do mouse
+                const mouseX = event.clientX - rect.left
+                const mouseY = event.clientY - rect.top
+
+                // Loop para detectar se algum botão foi clicado
+
+                botoes.forEach(botao => {
+                    
+                    // Lógica para detectar se o mouse está dentro das extremidades do botão
+                    if (mouseX > botao.x - 10 && mouseX < botao.x + 10 && mouseY > botao.y - 10 && mouseY < botao.y + 10)
+                    {
+
+                        // Identificar o Output
+                        output = document.getElementById(`mission${p}-position`)
+
+                        // Altera o output
+                        output.value = botao.nome
+
+                        // Esconde o canvas
+                        document.getElementById('mesa').style.display = 'none'
+
+                        // Limpar array de botões
+                        botoes = []
+                    }
+                });
+            }
+            )
+
+            // Define o Event Listener como Já ativado
+            eventListenerAtivado = true
+            }
+        }
+    </script>
+</body>
+</html>

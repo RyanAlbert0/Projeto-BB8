@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interface - BB8: Archaeologist</title>
+    <link rel="icon" type="image/x-icon" href="../imagens/icon-bb8.png">
+</head>
+<body>
+    <div id="corpo">
+
+        <!-- Divs principais de cabeçalho e conteúdo -->
+        <div id="title">
+            <h1>Interface Administrativa - BB8: Archaeologist</h1>
+        </div>
+        <div id="content">
+
+            <!-- Separador da Matriz -->
+            <div class="separator">
+                <div class="title">
+                    <h1>Atualizar Matriz</h1>
+                </div>
+                <div class="desc">
+                    <p>Acesse para atualizar a matriz de benefício</p>
+                </div>
+                <button class="interface-btn" onclick="matriz()">Atualizar Matriz</button>
+           
+            <!-- Separador da montagem de saídas -->
+            <div class="separator">
+                <div class="title">
+                    <h1>Montar Saída</h1>
+                </div>
+                <div class="desc">
+                    <p>Acesse para criar um trajeto para uma saída</p>
+                </div>
+                <button class="interface-btn" onclick="montarSaida()">Montar Saída</button>
+            
+            <!-- Separador da edição de saída -->
+            <div class="separator">
+                <div class="title">
+                    <h1>Editar Saída</h1>
+                </div>
+                <div class="desc">
+                    <p>Acesse para editar o trajeto de uma saída</p>
+                </div>
+                <button class="interface-btn" onclick="editarSaida()">Editar Saída</button>
+            
+            <!-- Separador da visualização das saídas -->
+            <div class="separator">
+                <div class="title">
+                    <h1>Visualizar Saídas</h1>
+                </div>
+                <div class="desc">
+                    <p>Acesse para visualizar o trajeto das saídas criadas</p>
+                </div>
+                <button class="interface-btn" onclick="verSaidas()">Visualizar Saídas</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        // Função para enviar para a página da Matriz de Benefício
+        function matriz()
+        {
+            // Envia para a página da matriz
+            window.location.href="../matriz/matriz.html"
+            console.log('Indo para: Matriz')
+        }
+
+        // Função para enviar para a página de Montagem de Saídas
+        function montarSaida()
+        {
+
+            // Envia para a página de montagem de saídas
+            window.location.href="../montar/montar.html"
+            console.log('Indo para: Montar Saídas')
+        }
+        
+        // Função para enviar para a página de Edição de Saídas
+        function editarSaida()
+        {
+
+            // Envia para a página de edição de saídas
+            window.location.href=""
+            console.log('Indo para: Editar Saídas')
+        }
+        
+        // Função para enviar para a página de Visualização de Saídas
+        function verSaidas()
+        {
+
+            // Envia para a página de visualização de saídas
+            window.location.href=""
+            console.log('Indo para: Ver Saídas')
+        }
+
+    </script>
+</body>
+</html>

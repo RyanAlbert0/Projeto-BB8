@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acessar: BB8 - Archaeologist</title>
+    <link rel="icon" type="image/x-icon" href="imagens/icon-bb8.png">
+    <link rel="stylesheet" href="login/login.css">
+</head>
+<body>
+    <!-- Título do Site -->
+    <div id="header">
+        <h1>BB8: Archaeologist</h1>
+        <img src="imagens/Logo SESI 2.png" id="logoSESI">
+    </div>
+    <!-- Página de Login -->
+    <div id="page">
+        <img src="imagens/Logo BB8.jpeg" id="Logobb8">
+        <!-- Box para a página  -->
+        <div id="login">
+            <!-- Acesso livre (bypass para a visualização das saídas) -->
+            <div id="freeAccess">
+                <a href="exibirSaidas/exibirSaidas.html" class="hrefStyles" id="freeAccessBTN" >Acessar Saídas</a>
+                <div id="Separator" ></div>
+            </div>
+            <!-- Acesso para administradores; Adicionar informações -->
+            <div id="adminAccess">
+                <div id="whiteBox">
+                    <h1 class="text">Modo Administrador</h1>
+                    <input type="text" id="user" class="adminAccessInput" placeholder="Usuário">
+                    <input type="password" id="token" class="adminAccessInput" placeholder="Senha">
+                    <button onclick="access()">Acessar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        // Ao carregar a página, define o valor 'isLogged' presente no SessionStorage como false;
+        // Serve para o funcionamento do botão de Editar, que permitiria acesso não autorizado;
+        // a informações sensíveis.
+
+        window.onload = function() {
+            sessionStorage.setItem('isLogged', false);
+            primeiroAcesso = localStorage.getItem('primeiroAcesso');
+             // Tabela de coordenadas
+
+            const coordenadas = [
+
+            [90, 70], [40, 260], [250, 200], [330, 305], [420, 50], [430, 380], [515, 270], [540, 645], 
+            [850, 30], [790, 340], [880, 310], [745, 645], [1025, 40], [1185, 90], [1220, 290]
+
+            ]
+
+            // Esta etapa é de envio e verificação da tabela 'coordenadas' para ser usada globalmente no site
+
+            // Captura os dados do Session Storage (não é necessário esta informação ser permanente, já que a informação base está aqui)
+            let ssCoordenadas = sessionStorage.getItem('coordenadas')
+
+            // Checa se o SessionStorage está vazio
+            if (ssCoordenadas != null)
+            {
+                // Apenas retorne no console
+                console.log('As informações estão salvas')
+            }
+            else
+            {
+                // Envia para o session storage
+                sessionStorage.setItem('coordenadas', JSON.stringify(coordenadas))
+            }
+        };
+
+        // Função para validar o acesso do usuário. Utiliza um sistema simples por não;
+        // ser necessário um sistema mais elaborado, com uma barreira apenas para aqueles;
+        // que não possuem conhecimento de código-fonte;
+
+        function access() {
+            const user = document.getElementById('user').value;
+            const token = document.getElementById('token').value;
+
+            // Credenciais para autenticação
+            const validUser = 'admin';
+            const validToken = '123456';
+
+            // Lógica de autenticação
+            if (user === validUser && token === validToken) {
+
+                // Define o parâmetro "logado" para true
+                sessionStorage.setItem('isLogged', true)
+
+                // Verifica se é o primeiro acesso
+                if (primeiroAcesso == 'false')
+                {
+                    // Caso não seja, envia para a interface
+                    window.location.href = 'interface/interface.html';
+                }
+
+                else
+                {
+                    // Caso seja, envia para a criação de matriz e define firstAccess como false
+                    window.location.href='matriz/matriz.html'                
+
+                }
+                
+            } else {
+                alert('Usuário ou senha incorretos!');
+                window.location.reload();
+            }
+        }
+
+        // Permite o uso da tecla 'Enter' para executar a função access();
+
+        document.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            if(document.activeElement.tagName == 'INPUT'){
+            access()
+            }
+        }
+        });      
+
+    </script>
+</body>
+</html>

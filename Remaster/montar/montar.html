@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../imagens/icon-bb8.png">
+    <title>Montar Saída - BB8 Archaeologist</title>
+</head>
+<body>
+
+    <div id="header">
+        <button onclick="window.location.href = '../interface/interface.html'" id="home"><img src="../imagens/casa.png" width="50" height="50"></button>
+        <h1>Montar Saída - BB8: Archaeologist</h1>
+        <img src="../imagens/Logo SESI 2.png" id="logoSESI">
+    </div>
+
+    <div id="content">
+        <div id="img">
+        <canvas id="mesa" width="1280" height="720" style="border: 1px solid black;"></canvas>
+        <img src="../imagens/table.jpg" id="mesaIMG" style="display: none;">
+        </div>
+    </div>
+    <div id="userInputs">
+        <input id="nomeSaidaInput" type="text" placeholder="Defina o nome da saída">
+        <input id="corSaidaInput" type="color">
+        <button id="enviarSaidaBTN" onclick="enviar()" type="button">Enviar Saídas</button>
+        <div id="pontosSelecionadosDiv">
+            <label id="pontosSelecionadosTexto">Nenhum ponto selecionado</label>
+            <p id="pontosSelecionadosOutput"></p>
+        </div>
+        <button id="removerPontosBTN" type="button" onclick="removerPontos()">Apagar pontos</button>
+        
+
+    </div>
+</body>
+
+<script>
+    // Declara o array de botões
+    let botoes = []
+
+    // Array da saida
+    let saida = []
+
+    // Array dos pontos
+    let pontos = []
+
+    // Declara o event listener como false
+    let eventListenerAtivado = false
+    
+    // Declara o label e o texto que irá exibir as informações
+    const outputLabel = document.getElementById('pontosSelecionadosTexto')
+    const outputTexto = document.getElementById('pontosSelecionadosOutput') 
+
+    // Ativa as funções do Canvas e do Clique
+    canvas()
+    clique()
+    
+    // Função para realizar todas as operações de renderização do Canvas
+    function canvas() 
+    {
+        // Identifica o Canvas
+        const c = document.getElementById('mesa')
+
+        // Declara o canvas como um objeto 2D
+        const ctx = c.getContext('2d')
+
+
+        // Tabela de coordenadas
+        let coordenadas = JSON.parse(sessionStorage.getItem('coordenadas'))
+
+        // Carrega a imagem no Canvas
+        const img = document.getElementById('mesaIMG')
+
+        // Se a imagem estiver carregada, aplique ao Canvas
+        img.onload = function()
+        {
+            ctx.drawImage(img, 0, 0, 1280, 720)
+
+            // Cria os pontos com base na tabela de coordenadas
+            for (i = 1; i < 13; i++)
+            {
+    
+                // Pega as coordenadas com base na contagem 'i'
+                let x = coordenadas[i][0]
+                let y = coordenadas[i][1]
+    
+                // Desenha o círculo na coordenada atual
+                ctx.beginPath()
+                ctx.arc(x, y, 10, 0, 2 * Math.PI)
+                ctx.fillStyle = 'orange'
+                ctx.strokeStyle = 'orange'
+                ctx.fill()
+                ctx.stroke()
+    
+                // Desenha o texto para a coordenada atual acima do círculo
+                ctx.font = '30px Arial'
+                ctx.textAlign = 'center'
+                ctx.fillText(i, x, y + 40)
+    
+                // Salva as informações de coordenada, diâmetro e nome do botão
+                let botao = {'x': x, 'y': y, 'size': 20, 'nome': i}
+    
+                // Envia para o Array Botões
+                botoes.push(botao)
+            }
+        }
+
+
+
+
+    }
+
+    // Função para realizar todas as operações de detecção de clique do Canvas
+    function clique()
+    {
+
+        // Declarar o Canvas
+        const canvas = document.getElementById('mesa')
+
+        // Checa se o Canvas já tem o Event Listener
+        if (eventListenerAtivado == false)
+        {
+            // Adiciona o Event Listener de tipo Clique
+            canvas.addEventListener('click', function(event)
+            {
+                // Define o tamanho do Canvas e a posição
+                const rect = canvas.getBoundingClientRect()
+    
+                // Define a posição X e Y do mouse
+                const mouseX = event.clientX - rect.left
+                const mouseY = event.clientY - rect.top
+
+                // Loop para detectar se algum botão foi clicado
+
+                botoes.forEach(botao => {
+
+                    // Lógica para detectar se o mouse está dentro das extremidades do botão
+                    if (mouseX > botao.x - 10 && mouseX < botao.x + 10 && mouseY > botao.y - 10 && mouseY < botao.y + 10)
+                    {
+
+                        // Envia o botão selecionado para um array da saída
+                        pontos.push(botao.nome)
+
+                        // Emite um alerta no console
+                        console.log(`O botão ${botao.nome} foi selecionado`)
+
+                        // Checa se tem um ou mais pontos em pontos
+                        if(pontos.length == 1)
+                        {
+                            // Adapta o outputTexto para o singular
+                            outputLabel.innerText = 'O ponto selecionado foi: '
+                        }
+                        else if (pontos.length > 1)
+                        {
+                            // Emite o output para o usuário
+                            outputLabel.innerText = 'Os pontos selecionados foram: ' 
+                        }
+                        else
+                        {
+                            // Emite o output para o usuário
+                            outputLabel.innerText = 'Sem pontos selecionados' 
+                        }
+
+                        // Ajusta o output
+                        outputTexto.innerText = pontos
+
+
+
+
+                        
+                    }
+                })
+
+            })
+            
+            // Define o Event Listener como ativado
+            eventListenerAtivado = true
+        }
+        
+    }
+
+    function enviar()
+    {
+        // Identifica o input responsável pelo nome da saída
+        let nomeSaida = document.getElementById('nomeSaidaInput').value
+
+        // Identifica o input responsável pela cor da saída
+        let corSaida = document.getElementById('corSaidaInput').value
+
+        // Envia a missão selecionada para o LocalStorage
+        msg = `
+
+            Você está prestes a definir a missão ${nomeSaida}
+            com os pontos ${pontos}.
+            
+            Deseja prosseguir?
+        
+        `
+        if(confirm(msg))
+        {
+            // Salva todos os dados no Array de saída
+            saida.push(corSaida, pontos)
+
+            // Executa a função
+            localStorage.setItem(nomeSaida, JSON.stringify(saida))
+
+            // Recarrega a página
+            window.location.reload()
+        }
+
+    }
+
+    // Função para excluir pontos específicos
+    function removerPontos()
+    {
+        // Define as mensagens dinâmicas
+        multiponto = `Você está prestes a apagar os pontos. Tem certeza?
+        Os pontos a serem excluídos são: ${pontos}`
+
+        uniponto = `Você está prestes a apagar apenas um ponto. Tem certeza?
+        Você ira apagar o ponto ${pontos}`
+
+        // Ajusta dinamicamente
+        if(pontos == 1 && confirm(uniponto))
+        {
+            // Avisa e realiza a limpeza
+            window.alert(`Você apagou o ponto ${pontos}`)
+            pontos = []
+            // Emite o output para o usuário
+            outputLabel.innerText = 'Sem pontos selecionados' 
+            outputTexto.innerText = pontos
+
+        }
+
+        else if (pontos > 1 && confirm(multiponto))
+        {
+            // Avisa e realiza a limpeza
+            window.alert(`Você apagou os pontos ${pontos}`)
+            pontos = []
+            // Emite o output para o usuário
+            outputLabel.innerText = 'Sem pontos selecionados' 
+            outputTexto.innerText = pontos
+        }
+
+        else
+        {
+            // Retorna a mensagem
+            window.alert(`Operação cancelada! O usuário negou a operação ou não há botões a serem apagados`)
+        }
+    }   
+</script>
+
+</html>
