@@ -5,7 +5,7 @@ const valores = [
     {"Pos":2, "Valor":{x: 60, y: 400}},
     {"Pos":3, "Valor":{x: 630, y: 80}},
     {"Pos":4, "Valor":{x: 650, y: 500}},
-    {"Pos":5, "Valor":{x: 820, y: 975}},
+    {"Pos":5, "Valor":{x: 820, y: 955}},
     {"Pos":6, "Valor":{x: 1150, y: 970}},
     {"Pos":7, "Valor":{x: 1185, y: 520}},
     {"Pos":8, "Valor":{x: 1320, y: 475}},
@@ -13,25 +13,41 @@ const valores = [
     {"Pos":10, "Valor":{x: 1530, y: 60}},
     {"Pos":11, "Valor":{x: 1780, y: 140}},
     {"Pos":12, "Valor":{x: 1830, y: 450}},  
-];
+    {"Pos":13, "Valor":{x: 502, y: 457}},  
+    {"Pos":14, "Valor":{x: 640, y: 570}},  
+    {"Pos":15, "Valor":{x: 790, y: 430}},  
+    {"Pos":16, "Valor":{x: 1170, y: 65}},  
+    {"Pos":17, "Valor":{x: 1855, y: 60}},  
+    {"Pos":18, "Valor":{x: 385, y: 305}},  
+    {"Pos":19, "Valor":{x: 813, y: 1000}},  
+    {"Pos":20, "Valor":{x: 630, y: 40}},  
+  ];
 
 const cor = "#ffcb59ff";
 const corSelec = "rgb(167, 114, 0)";
 
 // Array para armazenar os botões
 const buttons = [
-    { x: 106, y: 80, width: 60, height: 60, text: "1", normalColor: cor, selectedColor: corSelec, selected: false },
-    { x: 30, y: 370, width: 60, height: 60, text: "2", normalColor: cor, selectedColor: corSelec, selected: false },
-    { x: 600, y: 50, width: 60, height: 60, text: "3", normalColor: cor, selectedColor: corSelec, selected: false },
-    { x: 620, y: 470, width: 60, height: 60, text: "4", normalColor: cor, selectedColor: corSelec, selected: false },
-    { x: 787, y: 940, width: 60, height: 60, text: "5", normalColor: cor, selectedColor: corSelec, selected: false },
-    { x: 1100, y: 945, width: 60, height: 60, text: "6", normalColor: cor, selectedColor: corSelec, selected: false },
-    { x: 1160, y: 495, width: 60, height: 60, text: "7", normalColor: cor, selectedColor: corSelec, selected: false },
-    { x: 1285, y: 445, width: 60, height: 60, text: "8", normalColor: cor, selectedColor: corSelec, selected: false },
-    { x: 1250, y: 40, width: 60, height: 60, text: "9", normalColor: cor, selectedColor: corSelec, selected: false },
-    { x: 1505, y: 40, width: 60, height: 60, text: "10", normalColor: cor, selectedColor: corSelec, selected: false },
-    { x: 1755, y: 110, width: 60, height: 60, text: "11", normalColor: cor, selectedColor: corSelec, selected: false },
-    { x: 1800, y: 425, width: 60, height: 60, text: "12", normalColor: cor, selectedColor: corSelec, selected: false }
+    { x: 106, y: 80, width: 60, height: 60, text: "1", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
+    { x: 30, y: 370, width: 60, height: 60, text: "2", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
+    { x: 600, y: 90, width: 60, height: 60, text: "3", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
+    { x: 620, y: 470, width: 60, height: 60, text: "4", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
+    { x: 787, y: 900, width: 60, height: 60, text: "5", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
+    { x: 1100, y: 945, width: 60, height: 60, text: "6", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
+    { x: 1160, y: 495, width: 60, height: 60, text: "7", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
+    { x: 1285, y: 445, width: 60, height: 60, text: "8", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
+    { x: 1250, y: 40, width: 60, height: 60, text: "9", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
+    { x: 1505, y: 40, width: 60, height: 60, text: "10", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
+    { x: 1755, y: 110, width: 60, height: 60, text: "11", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
+    { x: 1800, y: 425, width: 60, height: 60, text: "12", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
+    { x: 462, y: 427, width: 60, height: 60, text: "13", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
+    { x: 620, y: 550, width: 60, height: 60, text: "14", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
+    { x: 760, y: 400, width: 60, height: 60, text: "15", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
+    { x: 1135, y: 38, width: 60, height: 60, text: "16", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
+    { x: 1825, y: 35, width: 60, height: 60, text: "17", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
+    { x: 350, y: 285, width: 60, height: 60, text: "18", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
+    { x: 787, y: 980, width: 60, height: 60, text: "19", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
+    { x: 600, y: 30, width: 60, height: 60, text: "20", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 }
 ];
 
 let canvas, ctx;
@@ -191,6 +207,38 @@ if (img && img.complete && img.naturalWidth) {
     const hurdleParameter = document.getElementById('hurdle')
     var parameters = []
     
+    // Helpers para compatibilidade de formatos de localStorage
+    function getMissionFromItem(item) {
+        if (!item) return undefined;
+        // formato do projeto: [x, y, [in,out], missao, tempo, complexidade]
+        if (Array.isArray(item[2])) return item[3];
+        // formato alternativo (mais antigo ou simplificado): [x, y, missao, tempo, complexidade]
+        return item[2];
+    }
+
+    function getTimeFromItem(item) {
+        if (!item) return undefined;
+        if (Array.isArray(item[2])) return item[4];
+        return item[3];
+    }
+
+    function getComplexFromItem(item) {
+        if (!item) return undefined;
+        if (Array.isArray(item[2])) return item[5];
+        return item[4];
+    }
+
+    function setTimeAndComplex(item, time, complex) {
+        if (!item) return;
+        if (Array.isArray(item[2])) {
+            item[4] = time;
+            item[5] = complex;
+        } else {
+            item[3] = time;
+            item[4] = complex;
+        }
+    }
+    
     if (exitsSelect) {
         // Preencher o select com todas as chaves do localStorage, exceto i18nextLng
         for (let i = 0; i < localStorage.length; i++) {
@@ -225,8 +273,41 @@ if (img && img.complete && img.naturalWidth) {
                 
                 if (dados) {
                     try {
-                        const lista = JSON.parse(dados);
+                        let lista = JSON.parse(dados);
                         parameters = [] // Limpa o array de parâmetros antes de preenchê-lo novamente
+
+                        // Normalizar formato antigo: alguns registros antigos tinham uma
+                        // posição vazia em index 2 e deslocavam a missão para index 3.
+                        // Detectar e corrigir esses casos automaticamente.
+                        let migrated = false;
+                        lista = lista.map(item => {
+                            // item may be an array like [x,y,,missao,tempo,complexidade]
+                            if (Array.isArray(item)) {
+                                // older format has length >=6 and empty item[2]
+                                if ((item.length >= 6) && (item[2] === undefined || item[2] === null || item[2] === "")) {
+                                    const corrected = [item[0], item[1], item[3], item[4], item[5]];
+                                    migrated = true;
+                                    return corrected;
+                                }
+                                // also handle case where mission is at index 3 but length ===5 (rare)
+                                if ((item.length === 5) && (item[2] === undefined) && item[3]) {
+                                    const corrected = [item[0], item[1], item[3], item[4] || 0, item[5] || 0];
+                                    migrated = true;
+                                    return corrected;
+                                }
+                            }
+                            return item;
+                        });
+
+                        // If we migrated data, write it back to localStorage so future loads are correct
+                        if (migrated) {
+                            try {
+                                localStorage.setItem(chave, JSON.stringify(lista));
+                                console.log(`LocalStorage da saída "${chave}" migrado para formato atualizado.`);
+                            } catch (e) {
+                                console.warn('Falha ao migrar localStorage:', e);
+                            }
+                        }
 
                         parameters = lista
                         
@@ -234,22 +315,21 @@ if (img && img.complete && img.naturalWidth) {
                         
                         // Verificar e exibir informações
                         lista.forEach((item, index) => {
-                            parameters.push(index + 1)
+                            // Não adicionar índices ao array de parâmetros (mantém apenas os itens)
                             console.log(`Item ${index + 1}:`, {
                                 x: item[0],
                                 y: item[1],
-                                missao: item[2],
-                                tempo: item[3],
-                                complexidade: item[4]
+                                missao: getMissionFromItem(item),
+                                tempo: getTimeFromItem(item),
+                                complexidade: getComplexFromItem(item)
                             });
                         });
 
                         // Extrair missões únicas e adicionar ao select
                         const missoes = new Set();
                         lista.forEach(item => {
-                            if (item[2]) { // item[2] é a missão
-                                missoes.add(item[2]);
-                            }
+                            const m = getMissionFromItem(item);
+                            if (m) missoes.add(m);
                         });
                         
                         // Adicionar opções ao select
@@ -269,11 +349,12 @@ if (img && img.complete && img.naturalWidth) {
 
         missionSelect.addEventListener('change', function() {
             const missaoSelecionada = this.value;
-            const parametrosFiltrados = parameters.filter(param => param[2] === missaoSelecionada);
-            console.log(parametrosFiltrados[0][3]);
-            timeParameter.value = parametrosFiltrados[0][3]
-            hurdleParameter.value = parametrosFiltrados[0][4]
-            
+            const parametrosFiltrados = parameters.filter(param => getMissionFromItem(param) === missaoSelecionada);
+            if (!parametrosFiltrados || parametrosFiltrados.length === 0) return;
+            console.log(getTimeFromItem(parametrosFiltrados[0]));
+            timeParameter.value = getTimeFromItem(parametrosFiltrados[0]) || '';
+            hurdleParameter.value = getComplexFromItem(parametrosFiltrados[0]) || '';
+
             // Encontrar e destacar o botão correspondente à posição armazenada
             const x_armazenado = parametrosFiltrados[0][0];
             const y_armazenado = parametrosFiltrados[0][1];
@@ -297,7 +378,7 @@ if (img && img.complete && img.naturalWidth) {
 
 function salvarSaida() {
     const saida = document.getElementById('exits').value.trim()
-    const missao = document.getElementById('mission').value
+        const missao = document.getElementById('mission').value
     const tempo = document.getElementById('time').value.trim()
     const complexidade = document.getElementById('hurdle').value.trim()
 
@@ -310,12 +391,11 @@ function salvarSaida() {
                 return;
             }
             const lista = JSON.parse(dados);
-            const index = lista.findIndex(item => item[2] === missao);
+            const index = lista.findIndex(item => getMissionFromItem(item) === missao);
             if (index !== -1) {
                 lista[index][0] = novaPosicao[0];
                 lista[index][1] = novaPosicao[1];
-                lista[index][3] = tempo;
-                lista[index][4] = complexidade;
+                setTimeAndComplex(lista[index], tempo, complexidade);
                 localStorage.setItem(saida, JSON.stringify(lista));
                 alert("Dados atualizados com sucesso!");
             }
@@ -328,15 +408,17 @@ function salvarSaida() {
 function apagarPonto() {
 
     const saida = document.getElementById('exits').value.trim()
-    const missao = document.getElementById('mission').value
+        const missao = document.getElementById('mission').value
 
-    const dados = JSON.parse(localStorage.getItem(saida));
-    if (dados) {
-            const index = dados.findIndex(item => item[2] === missao);
+        const dados = JSON.parse(localStorage.getItem(saida));
+        if (dados) {
+            const index = dados.findIndex(item => getMissionFromItem(item) === missao);
+            if (index !== -1) {
             dados.splice(index, 1);
             localStorage.setItem(saida, JSON.stringify(dados));
             alert("Ponto apagado com sucesso!");
-            window.location.reload();    
-    }
+            window.location.reload();
+            }
+        }
 
 }

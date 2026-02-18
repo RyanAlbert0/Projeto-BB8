@@ -65,22 +65,29 @@ const corSelec = "#ffae00ff";
 const buttons = [
     { x: 106, y: 80, width: 60, height: 60, text: "1", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
     { x: 30, y: 370, width: 60, height: 60, text: "2", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
-    { x: 600, y: 50, width: 60, height: 60, text: "3", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
+    { x: 600, y: 90, width: 60, height: 60, text: "3", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
     { x: 620, y: 470, width: 60, height: 60, text: "4", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
-    { x: 787, y: 940, width: 60, height: 60, text: "5", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
+    { x: 787, y: 900, width: 60, height: 60, text: "5", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
     { x: 1100, y: 945, width: 60, height: 60, text: "6", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
     { x: 1160, y: 495, width: 60, height: 60, text: "7", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
     { x: 1285, y: 445, width: 60, height: 60, text: "8", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
     { x: 1250, y: 40, width: 60, height: 60, text: "9", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
     { x: 1505, y: 40, width: 60, height: 60, text: "10", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
     { x: 1755, y: 110, width: 60, height: 60, text: "11", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
-    { x: 1800, y: 425, width: 60, height: 60, text: "12", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 }
+    { x: 1800, y: 425, width: 60, height: 60, text: "12", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
+    { x: 462, y: 427, width: 60, height: 60, text: "13", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
+    { x: 620, y: 550, width: 60, height: 60, text: "14", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
+    { x: 760, y: 400, width: 60, height: 60, text: "15", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
+    { x: 1135, y: 38, width: 60, height: 60, text: "16", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
+    { x: 1825, y: 35, width: 60, height: 60, text: "17", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
+    { x: 350, y: 285, width: 60, height: 60, text: "18", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
+    { x: 787, y: 980, width: 60, height: 60, text: "19", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 },
+    { x: 600, y: 30, width: 60, height: 60, text: "20", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 }
 ];
 
 // Botões extras que aparecem apenas com zoom >= zoomThreshold
 const botõesExtras = [
   // Exemplo: adicione quantos botões extras quiser aqui
-  { x: 367, y: 285, width: 60, height: 60, text: "13", normalColor: cor, selectedColor: corSelec, selected: false, baseWidth: 60, baseHeight: 60, baseRadius: 30 }
 ];
 
 const valores = [
@@ -88,7 +95,7 @@ const valores = [
     {"Pos":2, "Valor":{x: 60, y: 400}},
     {"Pos":3, "Valor":{x: 630, y: 80}},
     {"Pos":4, "Valor":{x: 650, y: 500}},
-    {"Pos":5, "Valor":{x: 820, y: 975}},
+    {"Pos":5, "Valor":{x: 820, y: 955}},
     {"Pos":6, "Valor":{x: 1150, y: 970}},
     {"Pos":7, "Valor":{x: 1185, y: 520}},
     {"Pos":8, "Valor":{x: 1320, y: 475}},
@@ -96,7 +103,14 @@ const valores = [
     {"Pos":10, "Valor":{x: 1530, y: 60}},
     {"Pos":11, "Valor":{x: 1780, y: 140}},
     {"Pos":12, "Valor":{x: 1830, y: 450}},  
-    {"Pos":13, "Valor":{x: 384, y: 304}},  
+    {"Pos":13, "Valor":{x: 502, y: 457}},  
+    {"Pos":14, "Valor":{x: 640, y: 570}},  
+    {"Pos":15, "Valor":{x: 790, y: 430}},  
+    {"Pos":16, "Valor":{x: 1170, y: 65}},  
+    {"Pos":17, "Valor":{x: 1855, y: 60}},  
+    {"Pos":18, "Valor":{x: 385, y: 305}},  
+    {"Pos":19, "Valor":{x: 813, y: 1000}},  
+    {"Pos":20, "Valor":{x: 630, y: 40}},  
   ];
 
 
