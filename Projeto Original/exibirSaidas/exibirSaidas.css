@@ -2,6 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:opsz@8..144&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
+
+/* base styling from editar page so both match */
+@import url('../editarsaida/editar.css');
+
 body {
 
     font-family: 'Roboto Serif', serif;
@@ -33,56 +37,210 @@ body {
     /* Alinha ao topo para que canvas e inputs fiquem alinhados na mesma linha */
     align-items: flex-start;
     justify-content: center;
-    width: 100vw;
-    height: calc(100vh - 80px); /* Altura total da viewport menos a altura do título */
-
+    width: 65%;
+    height: auto;
     /* Mantém position:relative caso queira posicionar filhos relativamente ao container */
+    margin-left: 10%;
+    margin-top: 3%;
+}
+
+#canvas {
+    width: 100%;
+    height: auto;
+    margin: auto;
+
+    /* Volta para o fluxo normal (não absoluto) para ficar lado a lado com #inputs */
     position: relative;
+    align-self: flex-start; /* sobe para o topo do container */
+
+    /* Espaçamento entre canvas e os inputs — ajuste conforme preferir */
+}
+
+#home {
+  background: none;
+  border: none;
+  position: absolute;
+  left: 20px;
 }
 
 #inputs {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* centraliza os inputs horizontalmente */
-    justify-content: flex-start;
-    width: 40%;
-    height: auto;
-    padding: 20px; /* mais espaço interno */
-    margin-top: 6%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  padding: 20px;
+  margin-top: 70px;
+  margin-right: 50px;
 }
 
-/* Estiliza todos os inputs e select dentro de #inputs */
-#inputs input[type="number"]{
-    width: 80%; /* largura relativa ao container */
-    height: 40px; /* altura fixa maior */
-    margin: 8px 0; /* espaço vertical entre inputs */
-    padding: 8px 12px;
-    border: 2px solid transparent; /* borda transparente inicial */
+#table {
+  display: none;
+}
+
+/* Inputs e selects */
+#inputs input,
+#outputsFilter,
+#inputs select {
+  width: 85%;
+  height: 40px;
+  margin: 8px 0;
+  padding: 8px 12px;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 16px;
+  font-family: var(--font-main);
+  transition: all 0.2s ease;
+}
+
+#inputs input:focus,
+#outputsFilter:focus,
+#inputs select:focus {
+  border-color: #000;
+  outline: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Placeholder */
+#inputs input::placeholder,
+#outputsFilter::placeholder {
+  font-family: var(--font-main);
+}
+
+/* Container de saídas */
+#outputsContainer {
+  width: 85%;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 2px solid transparent;
+  padding: 8px;
+  border-radius: 4px;
+  background-color: #fff;
+  font-family: var(--font-main);
+}
+
+.output-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 16px;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.output-item:hover {
+  background: rgba(0,0,0,0.04);
+  border-color: #ccc;
+}
+
+.output-item label {
+  flex: 1;
+  margin-left: 8px;
+  font-weight: 500;
+}
+
+.output-item input[type="checkbox"] {
+  margin: 0;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+/* Resultados */
+#resultadosContainer {
+  width: 85%;
+  margin-top: 20px;
+  font-family: var(--font-main);
+}
+
+
+/* Resultados destacados */
+#tempoTotal,
+#complexidadeMedia {
+  composes: btn-laranja;
+  font-size: 25px;
+}
+
+  #inputs, #outputsContainer {
+    width: 95%;
+  }
+
+ #table {
+    display: none;
+}
+
+
+#inputs input::-webkit-input-placeholder,
+#inputs input:-ms-input-placeholder,
+#inputs input::placeholder,
+#outputsFilter::-webkit-input-placeholder,
+#outputsFilter:-ms-input-placeholder,
+#outputsFilter::placeholder {
+    font-family: 'Roboto Serif', serif !important;
+}
+
+/* Container de saídas */
+#outputsContainer {
+    width: 85%;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 2px solid transparent;
+    padding: 8px;
     border-radius: 4px;
     background-color: white;
-    font-size: 16px; /* texto maior */
-    transition: all 0.2s ease; /* suaviza transições */
-
+    font-family: 'Roboto Serif', serif;
 }
 
-/* Estilo quando o input está em foco */
-#inputs input[type="number"]:focus,
-#inputs select:focus {
-    border-color: black; /* borda preta quando selecionado */
-    outline: none; /* remove outline padrão do navegador */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* sombra sutil */
+#outputsContainer .output-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    margin-bottom: 6px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+    font-family: 'Roboto Serif', serif;
+    font-size: 16px;
+    transition: background 0.2s, border-color 0.2s;
 }
 
-/* Estilo especial para o checkbox */
-#inputs input[type="checkbox"] {
+#outputsContainer .output-item:hover {
+    background: rgba(0,0,0,0.04);
+    border-color: #ccc;
+}
+
+#outputsContainer .output-item label {
+    flex: 1;
+    margin-left: 8px;
+    font-weight: 500;
+}
+
+#outputsContainer .output-item input[type="checkbox"] {
+    margin: 0;
+}
+
+#resultadosContainer {
+    width: 85%;
+    margin-top: 20px;
+    font-family: 'Roboto Serif', serif;
+}
+
+/* Estilo especial para o checkbox dentro do container */
+#outputsContainer [type="checkbox"] {
     width: 20px;
     height: 20px;
     margin: 10px 0;
     cursor: pointer;
 }
 
-/* Estilo para o botão */
-#inputs button,a {
+/* Estilo para o botão/link principal dentro de #inputs */
+#inputs button,
+#inputs a {
     width: 80%;
     height: 40px;
     margin: 10px 0;
@@ -93,46 +251,7 @@ body {
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.2s;
-    font-family:sans-serif; 
-}
-
-#inputs button:hover {
-    background-color: rgb(225, 108, 0);
-}
-
-/* Estilo para o link como botão */
-#inputs a {
-    color: rgb(255, 255, 255);
-    text-decoration: none;
-    margin: 10px 0;
-    font-size: 16px;
-    width: 80%;
-    height: 40px;
-    background-color: rgb(255, 123, 0);
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.2s;
-    font-family: sans-serif; 
-}
-
-#inputs a:hover {
-    background-color: rgb(225, 108, 0);
-    text-decoration: none;
-}
-
-#canvas {
-    width: 50%;
-    height: auto;
-    margin: auto;
-
-    /* Volta para o fluxo normal (não absoluto) para ficar lado a lado com #inputs */
-    position: relative;
-    align-self: flex-start; /* sobe para o topo do container */
-
-    /* Espaçamento entre canvas e os inputs — ajuste conforme preferir */
-    margin-right: 20px;
+    font-family: 'Roboto Serif', serif !important;
 }
 
 #buttons{
@@ -143,42 +262,16 @@ body {
     width: 100%;
     height: auto;
     margin-top: 20px;
-
-}
-#inputs select {
-    width: 85%; /* largura relativa ao container */
-    height: 57px; /* altura fixa maior */
-    margin: 8px 0; /* espaço vertical entre inputs */
-    padding: 8px 12px;
-    border: 2px solid transparent; /* borda transparente inicial */
-    border-radius: 4px;
-    background-color: white;
-    font-size: 16px; /* texto maior */
-    transition: all 0.2s ease; /* suaviza transições */
 }
 
-
-
-
-#outputsContainer .output-item:hover {
-    background: rgba(0,0,0,0.04);
-}
-
-#home {
-    background: none;
-    position: absolute;
-    margin-right: 90%;
-    border: none;
-
-}
 #tempoTotal {
-    font-family: sans-serif; 
+    font-family: 'Roboto Serif', serif;
     background-color: white;
     color: rgb(255, 255, 255);
     text-decoration: none;
     margin: 10px 0;
     font-size: 25px;
-    width: 80%;
+    width: 85%;
     height: 40px;
     background-color: rgb(255, 123, 0);
     border-radius: 4px;
@@ -188,13 +281,13 @@ body {
 }
 
 #complexidadeMedia{
-    font-family: sans-serif; 
+    font-family: 'Roboto Serif', serif;
     background-color: white;
     color: rgb(255, 255, 255);
     text-decoration: none;
     margin: 10px 0;
     font-size: 25px;
-    width: 80%;
+    width: 85%;
     height: 40px;
     background-color: rgb(255, 123, 0);
     border-radius: 4px;
