@@ -341,6 +341,7 @@ function draw(chave) {
             cb.type = 'checkbox';
             cb.dataset.key = key;
             cb.id = 'out_cb_' + i;
+            cb.class = 'saidacheckbox'
 
             const label = document.createElement('label');
             label.htmlFor = cb.id;

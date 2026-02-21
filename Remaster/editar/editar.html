@@ -25,6 +25,7 @@
         <select id="seletorPonto">
             <option value="" disabled hidden selected>Selecione um ponto</option>
         </select>
+        <button id="editarBase" onclick="editarBase()">Editar Base</button>
         <button id="deletarPonto" onclick="deletarPonto()">Deletar Ponto</button>
         <button id="deletarSaida" onclick="deletarSaida()">Deletar Saida</button>
         <input id="inputCores" type="color">
@@ -126,7 +127,7 @@
             // Separa as variáveis para a cor e os pontos
             let cor = saida[0]
             let pontos = saida[1]
-            let InOut = saida[2]
+            InOut = saida[2]
 
             // Define coordenadas com as informações de pontos
             pontosUsados = pontos
@@ -231,31 +232,7 @@
 
             // Cria os pontos com base na tabela de pontos de base
 
-            for(i = 0; i < 2; i++)
-                {
-                    let x = pontosBase[i]
-                    console.log(x)
-                    // const nome = pontosBase[i][0]
-                    // const cor = pontosBase[i][1]
-                    // const coord = pontosBase[i][2]
-
-                    // const x = coord[0]
-                    // const y = coord[1]
-
-                    // ctx.beginPath()
-                    // ctx.arc(x, y, 30, 0, 2 * Math.PI)
-                    // ctx.fillStyle = cor
-                    // ctx.strokeStyle = cor
-                    // ctx.fill()
-                    // ctx.stroke()
-                    // ctx.save()
-
-                    // ctx.font = '20px Arial'
-                    // ctx.textAlign = 'center'
-                    // ctx.fillStyle = 'black'
-                    // ctx.fillText(nome, x, y + 8)
-                    // ctx.restore()
-                }
+           
 
             // Cria os pontos com base na tabela de coordenadas
 
@@ -277,6 +254,33 @@
                 ctx.strokeStyle = cores.value
                 ctx.fill()
                 ctx.stroke()
+
+                // Verifica se é o primeiro da lista
+                if(idx == 0)
+                {
+                    let bx = pontosBase[0][2]
+                    let by = pontosBase[0][3]
+
+                    ctx.moveTo(bx, by)
+                    ctx.lineTo(x, y)
+                    ctx.lineWidth = 5
+                    ctx.stroke()
+
+                    console.log('Primeiro')
+
+                }
+                else if (idx == pontosUsados.length - 1)
+                {
+                    console.log('Último')
+
+                    let bx = pontosBase[1][2]
+                    let by = pontosBase[1][3]
+
+                    ctx.moveTo(bx, by)
+                    ctx.lineTo(x, y)
+                    ctx.lineWidth = 5
+                    ctx.stroke()
+                }
 
 
                 // Verifica se o ponto futuro existe - idx é o index do ponto atual
@@ -301,6 +305,8 @@
 
                     
                 }
+
+                
                 ctx.save()
 
                 ctx.font = '20px Arial'
@@ -309,7 +315,38 @@
                 ctx.fillText(ponto + 1, x, y + 8)
                 ctx.restore()
 
+
             })
+
+             for(i = 0; i < 2; i++)
+                {
+
+                    // Captura os dados da tabela pontosBase conforme o InOut
+                    if(InOut[0])
+
+                    // let nome = pontosBase[i][0]
+                    // let cor = pontosBase[i][1]
+                    // let x = pontosBase[i][2]
+                    // let y = pontosBase[i][3]
+
+                    // 
+
+                    console.log(nome)
+
+                    ctx.beginPath()
+                    ctx.arc(x, y, 30, 0, 2 * Math.PI)
+                    ctx.fillStyle = cor
+                    ctx.strokeStyle = cor
+                    ctx.fill()
+                    ctx.stroke()
+                    ctx.save()
+
+                    ctx.font = '20px Arial'
+                    ctx.textAlign = 'center'
+                    ctx.fillStyle = 'black'
+                    ctx.fillText(nome, x, y + 8)
+                    ctx.restore()
+                }
             
     }
   
@@ -360,9 +397,6 @@
                 botoes.push(botao)
 
             }
-
-            // Define o modo como Edição
-            modo = 1
 
             // Detecta o clique do usuário
             clique()
@@ -561,6 +595,14 @@
         }
     }
 
+    // Função para atualizar a base
+    function editarBase()
+    {
+
+        console.log(select.value)
+
+
+    }
 
 
 </script>
