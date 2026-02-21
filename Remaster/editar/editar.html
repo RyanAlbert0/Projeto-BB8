@@ -210,11 +210,7 @@
 
         const saida = select.options[select.selectedIndex].text
         let LS = JSON.parse(localStorage.getItem(saida))
-        console.log(LS)
-
         LS[0] = cores.value
-
-        console.log(LS)
 
         canvas()
 
@@ -235,28 +231,30 @@
 
             // Cria os pontos com base na tabela de pontos de base
 
-            for(i = 0; i < pontosBase.length; i++)
+            for(i = 0; i < 2; i++)
                 {
-                    const nome = pontosBase[i][0]
-                    const cor = pontosBase[i][1]
-                    const coord = pontosBase[i][2]
+                    let x = pontosBase[i]
+                    console.log(x)
+                    // const nome = pontosBase[i][0]
+                    // const cor = pontosBase[i][1]
+                    // const coord = pontosBase[i][2]
 
-                    const x = coord[0]
-                    const y = coord[1]
+                    // const x = coord[0]
+                    // const y = coord[1]
 
-                    ctx.beginPath()
-                    ctx.arc(x, y, 30, 0, 2 * Math.PI)
-                    ctx.fillStyle = cor
-                    ctx.strokeStyle = cor
-                    ctx.fill()
-                    ctx.stroke()
-                    ctx.save()
+                    // ctx.beginPath()
+                    // ctx.arc(x, y, 30, 0, 2 * Math.PI)
+                    // ctx.fillStyle = cor
+                    // ctx.strokeStyle = cor
+                    // ctx.fill()
+                    // ctx.stroke()
+                    // ctx.save()
 
-                    ctx.font = '20px Arial'
-                    ctx.textAlign = 'center'
-                    ctx.fillStyle = 'black'
-                    ctx.fillText(nome, x, y + 8)
-                    ctx.restore()
+                    // ctx.font = '20px Arial'
+                    // ctx.textAlign = 'center'
+                    // ctx.fillStyle = 'black'
+                    // ctx.fillText(nome, x, y + 8)
+                    // ctx.restore()
                 }
 
             // Cria os pontos com base na tabela de coordenadas
@@ -280,10 +278,6 @@
                 ctx.fill()
                 ctx.stroke()
 
-                if(idx == 0)
-                {
-                    console.log('Primeiro ponto')
-                }
 
                 // Verifica se o ponto futuro existe - idx é o index do ponto atual
                 if (idx < pontosUsados.length - 1) 
@@ -402,22 +396,17 @@
                             pontosS.appendChild(plusOption())
                         }
 
-                        console.log(`Os pontos desta saída são ${pontosUsados}`)
-
                         // Define o valor de pontosUsados no index atual para o novo ponto
                         pontosUsados[pontoSelect] = botao.nome
-                        console.log(`O botão selecionado foi o ${botao.nome} segundo o ID de código`)
 
                         // Define o título da option alterada para o respectivo novo ponto
                         pontosS.options[pontosS.selectedIndex].text = `Ponto nº ${botao.nome + 1}`
-                        console.log(`O botão selecionado foi o ${botao.nome + 1} segundo o ID de usuário`)
 
                         // Faz o envio das alterações para o LocalStorage
                         const saida = select.options[select.selectedIndex].text
                         
                         // Captura o valor do LocalStorage
                         let LS = JSON.parse(localStorage.getItem(saida))
-                        console.log(`A saída selecionada contem as informações ${LS}`)
                         
                         // Envia os dados
                         salvarDados(LS, pontosUsados, saida)
@@ -561,8 +550,6 @@
 
         msg = `Você está prestes a substituir a cor da saída.
                Você deseja continuar?`
-        console.log(LS)
-
         if(confirm(msg))
         {
 

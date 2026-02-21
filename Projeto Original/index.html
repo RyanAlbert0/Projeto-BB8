@@ -61,17 +61,10 @@
             const validUser = 'admin';
             const validToken = '123456';
 
-            if (user === validUser && token === validToken) {
                 // Redirecionar para a página principal
                 window.location.href = 'main/main.html';
                 sessionStorage.setItem('isLogged', true)
-            } else {
-                alert('Usuário ou senha incorretos!');
-                window.location.reload();
-            }
         }
-        
-
     </script>
 </body>
 </html>
