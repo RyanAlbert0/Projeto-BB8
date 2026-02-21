@@ -282,7 +282,6 @@ input[type="radio"][value="red"]:checked + label.radio-label.red-label {
 }
 
 input[type="color"] {
-  -webkit-appearance: none; /* remove estilo padrão */
   border: none;
   width: 100px;   /* controla largura total */
   height: 100px;  /* controla altura total */

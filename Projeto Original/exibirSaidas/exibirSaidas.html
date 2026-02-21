@@ -20,7 +20,7 @@
         <div id="map">
             <!-- Mantive a imagem no DOM (oculta) — o canvas irá desenhá-la.
                  id agora é "table" conforme solicitado -->
-            <img src="table.jpg" id="table" style="display:none">
+            <img src="table.jpg" id="table">
         </div>
 
 
@@ -30,10 +30,10 @@
                 <option value="" disabled selected hidden>Selecione a saída</option>
             </select> -->
             <label for="outputsFilter">Filtrar saídas:</label>
-            <input type="text" id="outputsFilter" placeholder="Buscar saída..." style="width:85%; margin:8px 0; padding:8px;">
+            <input type="text" id="outputsFilter" placeholder="Buscar saída...">
             <label for="outputsContainer">Escolher saídas:</label>
-            <div id="outputsContainer" style="width:85%; max-height:200px; overflow:auto; border:none; padding:8px; border-radius:4px;"></div>
-            <div id="resultadosContainer" style="margin-top: 20px;"></div>
+            <div id="outputsContainer"></div>
+            <div id="resultadosContainer"></div>
             
             <button onclick="acessarEditar()">Editar Pontos</button>
         </div>

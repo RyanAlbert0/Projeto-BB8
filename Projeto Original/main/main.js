@@ -128,6 +128,7 @@ function processarCliqueBotao(clickedButton, todasBotoes) {
     const OutSelected = document.querySelector('input[name="Out"]:checked')
     const OutEl = OutSelected ? OutSelected.value : ''
 
+    // mantém o mapeamento natural das cores
     if(InEl === 'blue'){
         In = 'azul'
         console.log('In Azul')
@@ -141,6 +142,7 @@ function processarCliqueBotao(clickedButton, todasBotoes) {
         console.log('Nulo')
     }
 
+    // mantém a correspondência de cor original para saídas
     if(OutEl === 'blue'){
         Out = 'azul'
         console.log('Out Azul')
