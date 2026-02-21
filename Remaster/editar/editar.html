@@ -20,13 +20,15 @@
     </div>
     <div id="userInputs">
         <select id="seletorSaida">
-            <option value="" disabled hidden selected>Selecione uma Saída</option>
+            <option value='null' disabled hidden selected>Selecione uma saída</option>
         </select>
         <select id="seletorPonto">
-            <option value="" disabled hidden selected>Selecione um Ponto</option>
+            <option value="" disabled hidden selected>Selecione um ponto</option>
         </select>
+        <button id="deletarPonto" onclick="deletarPonto()">Deletar Ponto</button>
+        <button id="deletarSaida" onclick="deletarSaida()">Deletar Saida</button>
         <input id="inputCores" type="color">
-        <button id="enviarSaidaBTN" onclick="enviar()" type="button">Atualizar Saídas</button>
+        <button id="confirmCores" onclick="confirmCores()">Confirmar Cor</button>
     </div>
 
 <script>
@@ -34,18 +36,42 @@
     // Declara o select de missoes
     const select = document.getElementById('seletorSaida')
 
+    // Declara o select de pontos
     const pontosS = document.getElementById('seletorPonto')
+
+    // Declara o botão de deletar
+    const deletarBotao = document.getElementById('deletarPonto')
+
+    // Define o botão de deletar como escondido
+    deletarBotao.style.display = 'none'
 
     // Declara o input de cores
     const cores = document.getElementById('inputCores')
 
+    // Declara a variável deletarBotaoModo
+    let deletarBotaoModo = 0
+
     // Declara a variável de ponto selecionado
     let pontoSelect = ''
+
+    // Declara o array de in out usados
+    const InOut = []
+
+    // Declara o tamanho de coordenadas disponível
+    const tamanhoCoordenadas = JSON.parse(sessionStorage.getItem('coordenadas'))
+
+    // Captura os pontos de base
+    const pontosBase = JSON.parse(sessionStorage.getItem('pontosBase'))
+
 
     // Event Listener adicionado
     let eventListenerSelectAtivado = false
     let eventListenerPontoAtivado = false
     let eventListenerCanvasAtivado = false
+    let eventListenerCoresAtivado = false
+
+    // Reseta o botão de cores
+    document.getElementById('confirmCores').style.display = 'none'
 
     // Define a variável coordenadas com o array do Session Storage
     let ssCoordenadas = JSON.parse(sessionStorage.getItem('coordenadas'))
@@ -65,18 +91,15 @@
     // Declara o array de botoes para o modo de edição
     botoes = []
 
-    
-
-
     // Coloca todas as saídas no Select
     for (i = 0; i < localStorage.length; i++)
     {
         // Define a variável key com uma chave do local storage no index de i
         let key = localStorage.key(i)
-
+        
         // Se a key for igual a 'missoes' ou 'primeiroAcesso' vai ignorar
         if (key === 'missoes' || key === 'primeiroAcesso') continue
-
+        
         // Cria um elemento option
         const opt = document.createElement('option')
 
@@ -97,9 +120,13 @@
         // Adiciona o Event Listener de alteração ao select
         select.addEventListener('change', function() {
 
+            // Coleta os valores da saida atual
+            const saida = JSON.parse(this.options[this.selectedIndex].value)
+
             // Separa as variáveis para a cor e os pontos
-            let cor = (JSON.parse(this.options[this.selectedIndex].value)[0])
-            let pontos = (JSON.parse(this.options[this.selectedIndex].value)[1])
+            let cor = saida[0]
+            let pontos = saida[1]
+            let InOut = saida[2]
 
             // Define coordenadas com as informações de pontos
             pontosUsados = pontos
@@ -127,14 +154,20 @@
                 
                 // Aplica o valor e o texto como o ponto da lista
                 opt.value = pontos[i]
-                opt.innerHTML = `Ponto nº ${pontos[i]}`
+
+
+
+                opt.innerHTML = `Ponto nº ${pontosUsados[i] + 1}`
                 
                 // Insere essa option ao Select de pontos
                 pontosS.appendChild(opt)
 
                 
-                // Aplicar a função para adicionar ou remover pontos
             }
+
+            // Adiciona uma opção de adição
+            pontosS.appendChild(plusOption())
+
         })
     }
     
@@ -144,34 +177,87 @@
         // Adiciona o Event Listener de alteração ao select de ponto
         pontosS.addEventListener('change', function()
         {
+            // Define a variável ponto como o index atual - 1
+            pontoSelect = this.selectedIndex - 1
             
-            let ponto = this.selectedIndex - 1
-            console.log(ponto)
             
-            pontoSelect = ponto
-            
+            // Se o texto da opção atual for diferente de 'Selecione um ponto'
             if(this.options[this.selectedIndex].text != 'Selecione um ponto')
             {
+                // Abre a opção de editar o ponto
                 editCanvas()
+
+                // Exibe o botão para deletar o ponto
+                deletarBotao.style.display = 'block'
             }
+            // Caso contrário
             else
             {
+                // Retorna o canvas normal
                 canvas()
+
+                // Esconde o botão para deletar o ponto
+                deletarBotao.style.display = 'none'
             }
         }
     )
     }
 
+    if(eventListenerCoresAtivado == false)
+    {
+        cores.addEventListener('change', function()
+    {
+
+        const saida = select.options[select.selectedIndex].text
+        let LS = JSON.parse(localStorage.getItem(saida))
+        console.log(LS)
+
+        LS[0] = cores.value
+
+        console.log(LS)
+
+        canvas()
+
+        document.getElementById('confirmCores').style.display = 'block'
+
+
+    })
+    }
     function canvas() 
     {
 
-        // Tamanho da lista coordenadas
-        let tamanhoCoordenadas = pontosUsados.length
-
+         // Limpar o Canvas Atual
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
 
         // Se a imagem estiver carregada, aplique ao Canvas
 
             ctx.drawImage(img, 0, 0, 1280, 720)
+
+            // Cria os pontos com base na tabela de pontos de base
+
+            for(i = 0; i < pontosBase.length; i++)
+                {
+                    const nome = pontosBase[i][0]
+                    const cor = pontosBase[i][1]
+                    const coord = pontosBase[i][2]
+
+                    const x = coord[0]
+                    const y = coord[1]
+
+                    ctx.beginPath()
+                    ctx.arc(x, y, 30, 0, 2 * Math.PI)
+                    ctx.fillStyle = cor
+                    ctx.strokeStyle = cor
+                    ctx.fill()
+                    ctx.stroke()
+                    ctx.save()
+
+                    ctx.font = '20px Arial'
+                    ctx.textAlign = 'center'
+                    ctx.fillStyle = 'black'
+                    ctx.fillText(nome, x, y + 8)
+                    ctx.restore()
+                }
 
             // Cria os pontos com base na tabela de coordenadas
 
@@ -188,11 +274,16 @@
 
                 // Desenha o círculo na coordenada atual
                 ctx.beginPath()
-                ctx.arc(x, y, 10, 0, 2 * Math.PI)
+                ctx.arc(x, y, 15, 0, 2 * Math.PI)
                 ctx.fillStyle = cores.value
                 ctx.strokeStyle = cores.value
                 ctx.fill()
                 ctx.stroke()
+
+                if(idx == 0)
+                {
+                    console.log('Primeiro ponto')
+                }
 
                 // Verifica se o ponto futuro existe - idx é o index do ponto atual
                 if (idx < pontosUsados.length - 1) 
@@ -202,6 +293,7 @@
 
                     // Define o par de coordenadas do ponto futuro
                     const coordF = ssCoordenadas[pontoF]
+
                     
                     // Declara as coordenadas X e Y para o ponto futuro
                     let xf = coordF[0]
@@ -210,16 +302,21 @@
                     // Traçar a linha
                     ctx.moveTo(x, y)
                     ctx.lineTo(xf, yf)
-                    ctx.lineWidth = 3
+                    ctx.lineWidth = 5
                     ctx.stroke()
 
                     
                 }
+                ctx.save()
+
                 ctx.font = '20px Arial'
                 ctx.textAlign = 'center'
-                ctx.fillText(ponto, x, y + 40)
+                ctx.fillStyle = 'black'
+                ctx.fillText(ponto + 1, x, y + 8)
+                ctx.restore()
 
-            });
+            })
+            
     }
   
     function editCanvas() 
@@ -235,7 +332,7 @@
             }
 
             // Cria os círculos segundo uma tabela de coordenadas
-            for (i = 1; i < 13; i++)
+            for (i = 0; i < tamanhoCoordenadas.length; i++)
             {
 
                 // Pega as coordenadas com base na contagem 'i'
@@ -244,7 +341,7 @@
                 
                 // Desenha o círculo para a coordenada atual
                 ctx.beginPath()
-                ctx.arc(x, y, 10, 0, 2 * Math.PI)
+                ctx.arc(x, y, 15, 0, 2 * Math.PI)
                 ctx.fillStyle = 'white'
                 ctx.fill()
                 ctx.strokeStyle = 'black'
@@ -254,10 +351,10 @@
                 ctx.save()
                 
                 // Desenha um texto para a coordenada atual acima do círculo
-                ctx.font = '30px Arial'
+                ctx.font = '20px Arial'
                 ctx.textAlign = 'center'
                 ctx.fillStyle = 'black'
-                ctx.fillText(i, x, y + 40)
+                ctx.fillText(i + 1, x, y + 8)
 
                 // ctx.restore() serve para restaurar o estado anterior
                 ctx.restore()
@@ -269,6 +366,9 @@
                 botoes.push(botao)
 
             }
+
+            // Define o modo como Edição
+            modo = 1
 
             // Detecta o clique do usuário
             clique()
@@ -296,67 +396,185 @@
                     // Lógica para detectar se o mouse está dentro das extremidades do botão
                     if (mouseX > botao.x - 10 && mouseX < botao.x + 10 && mouseY > botao.y - 10 && mouseY < botao.y + 10 && pontosS.options[pontosS.selectedIndex].text != 'Selecione um ponto')
                     {
+                        if(pontosS.options[pontosS.selectedIndex].text == '+')
+                        {
+                            // Adiciona um substituto ao elemento anterior
+                            pontosS.appendChild(plusOption())
+                        }
+
+                        console.log(`Os pontos desta saída são ${pontosUsados}`)
+
                         // Define o valor de pontosUsados no index atual para o novo ponto
                         pontosUsados[pontoSelect] = botao.nome
+                        console.log(`O botão selecionado foi o ${botao.nome} segundo o ID de código`)
 
                         // Define o título da option alterada para o respectivo novo ponto
-                        pontosS.options[pontosS.selectedIndex].text = `Ponto nº ${botao.nome}`
+                        pontosS.options[pontosS.selectedIndex].text = `Ponto nº ${botao.nome + 1}`
+                        console.log(`O botão selecionado foi o ${botao.nome + 1} segundo o ID de usuário`)
 
                         // Faz o envio das alterações para o LocalStorage
                         const saida = select.options[select.selectedIndex].text
                         
                         // Captura o valor do LocalStorage
                         let LS = JSON.parse(localStorage.getItem(saida))
+                        console.log(`A saída selecionada contem as informações ${LS}`)
                         
-                        // Atualiza o array de index 1
-                        LS[1] = pontosUsados
+                        // Envia os dados
+                        salvarDados(LS, pontosUsados, saida)
 
-                        // Retorna para o localStorage
-                        localStorage.setItem(saida, JSON.stringify(LS))
-
-                        //
-                        
 
                         // Limpar array de botões
                         botoes = []
+
+
+
+                        // Recarrega o canvas
                         canvas()
-                    }
+                        }
+
+                    })
                 });
             }
-            )
 
             // Define o Event Listener como Já ativado
             eventListenerCanvasAtivado = true
             }
-        }
 
+    // Função que limpa o select de pontos
     function resetPontosS()
     {
 
         // Cria a Option placeholder
 
         // Cria o objeto filho
-        let stdOption = document.createElement('option')
+        const stdOption = document.createElement('option')
 
         // Aplica propriedads como texto, valor, definindo propriedades como selected, hidden e disabled como true e retornando este objeto
         stdOption.text = 'Selecione um ponto'
         stdOption.value = ''
         stdOption.selected = true
-        // stdOption.hidden = true
-        // stdOption.disabled = true
-
         return stdOption
 
     }
 
-    function atualizarPontos()
+    // Função que adiciona a opção adição
+    function plusOption()
     {
+        // Cria a opção de adicionar
+        const plusOption = document.createElement('option')
+        plusOption.text = '+'
+        plusOption.value = ''
+        return plusOption
+    }
 
+    // Função para deletar o ponto selecionado
+    function deletarPonto()
+    {
+        // Remove o ponto atual do array de pontos usados
+        pontosUsados.splice(pontoSelect, 1)
+
+        // Seleciona a saída atual selecionada
+        const saida = select.options[select.selectedIndex].text
+
+        // Captura o localStorage original
+        const LS = JSON.parse(localStorage.getItem(saida))
+
+        // Função para realizar o salvamento dos dados
+        salvarDados(LS, pontosUsados, saida)
+
+        // Remove o ponto atual do select
+        pontosS.remove(pontosS.selectedIndex)
+
+        // Redesenha o canvas
+        canvas()
 
 
     }
 
-    // Aplicar função de adicionar ou remover pontos
+    // Atualizar o localStorage
+    function salvarDados(ls, ps, ex)
+    {
+        /**
+         * Faz toda a lógica de envio de dados locais para o localStorage
+         * @param {array} ls - O array com os dados originais do LocalStorage
+         * @param {array} ps - O array com os dados atualizados locais
+         * @param {string} ex - A saída (vulgo chave) que armazenará os dados no localStorage
+        */
+
+        ls[1] = ps
+        localStorage.setItem(ex, JSON.stringify(ls))
+        
+    }
+
+    // Função para deletar a saída selecionada
+    function deletarSaida()
+    {
+        // Identifica a saída atual
+        const selectedOption = select.options[select.selectedIndex]
+        const saidaValue = selectedOption.value
+        const saidaNome = selectedOption.text
+
+        // Confere se a saida não é nula
+        if(saidaValue != null)
+        {
+
+            // Captura o localStorage atual para exibir os pontos
+            let LS = JSON.parse(localStorage.getItem(saidaNome))[1]
+
+            // Laço de repetição para corrigir o nome dos pontos (estão em ID e precisam ser transformados para um valor melhor compreensível)
+            for(i = 0; i < LS.length; i++)
+            {
+                // Atualiza uma posição com ela mesma somada com 1
+                LS[i]= LS[i] + 1
+            }
+            
+            // Define a mensagem de confirmação usando a saída e o traçado dela
+            msg = `Você está prestes a deletar a saída ${saidaNome}!
+            O seguinte traçado será apagado:
+            ${LS}
+            
+            Você tem certeza? Esta ação é irreversível!
+            `
+
+            // Executa se o usuário confirmou
+            if(confirm(msg))
+            {
+                
+                // Remove a saída selecionada do localStorage
+                localStorage.removeItem(saidaNome)
+                window.location.reload()
+                
+            }
+        }
+        else
+        {
+            window.alert('A saída atual não é válida! Selecione uma saída primeiro.')
+        }
+    }
+
+    //Função para atualizar a cor
+    function confirmCores()
+    {
+        const selectedOption = select.options[select.selectedIndex].text
+
+        let LS = JSON.parse(localStorage.getItem(selectedOption))
+
+        msg = `Você está prestes a substituir a cor da saída.
+               Você deseja continuar?`
+        console.log(LS)
+
+        if(confirm(msg))
+        {
+
+            LS[0] = cores.value
+            localStorage.setItem(selectedOption, JSON.stringify(LS))
+
+            document.getElementById('confirmCores').style.display = 'none'
+
+        }
+    }
+
+
 
 </script>
 

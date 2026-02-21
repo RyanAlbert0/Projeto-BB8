@@ -41,17 +41,25 @@
         // Serve para o funcionamento do botão de Editar, que permitiria acesso não autorizado;
         // a informações sensíveis.
 
-        window.onload = function() {
+
             sessionStorage.setItem('isLogged', false);
             primeiroAcesso = localStorage.getItem('primeiroAcesso');
-             // Tabela de coordenadas
 
+             // Tabela de coordenadas
             const coordenadas = [
 
-            [90, 70], [40, 260], [250, 200], [330, 305], [420, 50], [430, 380], [515, 270], [540, 645], 
-            [850, 30], [790, 340], [880, 310], [745, 645], [1025, 40], [1185, 90], [1220, 290]
+            [93, 77], [40, 263], [255, 203], [325, 303], [419, 20], [419, 78], [432, 332], [432, 369], 
+            [524, 278], [545, 605], [545, 665], [747, 645], [781, 43], [794, 350], [856, 34], [878, 311],
+            [1022, 44], [1188, 93], [1217, 295], [1237, 44]
 
             ]
+
+            // Tabela de coordenadas de base
+            const pontosBase = [
+
+                [['V', '#a61b20', 109, 612], ['A', '#114880', 1180, 612]]
+            ]
+
 
             // Esta etapa é de envio e verificação da tabela 'coordenadas' para ser usada globalmente no site
 
@@ -68,8 +76,9 @@
             {
                 // Envia para o session storage
                 sessionStorage.setItem('coordenadas', JSON.stringify(coordenadas))
+                sessionStorage.setItem('pontosBase', JSON.stringify(pontosBase))
+
             }
-        };
 
         // Função para validar o acesso do usuário. Utiliza um sistema simples por não;
         // ser necessário um sistema mais elaborado, com uma barreira apenas para aqueles;

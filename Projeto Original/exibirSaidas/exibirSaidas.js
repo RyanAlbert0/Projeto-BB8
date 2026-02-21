@@ -305,11 +305,7 @@ function draw(chave) {
             const corSaida = localStorage.getItem(chave + 'cor') || '#000';
 
             const card = document.createElement('div');
-            card.style.border = '2px solid ' + corSaida;
-            card.style.borderRadius = '8px';
-            card.style.padding = '12px';
-            card.style.marginBottom = '10px';
-            card.style.backgroundColor = '#f9f9f9';
+            card.class = 'infoOutput';
 
             card.innerHTML = `
                 <h3 style="color: ${corSaida}; margin-top: 0;">${chave}</h3>
@@ -340,11 +336,6 @@ function draw(chave) {
             if (key === "i18nextLng" || key.includes('cor') || key.includes('InOut')) continue;
             const wrap = document.createElement('div');
             wrap.className = 'output-item';
-            wrap.dataset.key = key;
-            wrap.style.display = 'flex';
-            wrap.style.alignItems = 'center';
-            wrap.style.gap = '8px';
-            wrap.style.padding = '4px 2px';
 
             const cb = document.createElement('input');
             cb.type = 'checkbox';

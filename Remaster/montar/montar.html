@@ -29,6 +29,8 @@
             <p id="pontosSelecionadosOutput"></p>
         </div>
         <button id="removerPontosBTN" type="button" onclick="removerPontos()">Apagar pontos</button>
+        <p id="x">x</p>
+        <p id="y">y</p>
         
 
     </div>
@@ -38,11 +40,20 @@
     // Declara o array de botões
     let botoes = []
 
+    // Declara o array com a entrada e a saída
+    let InOutPos = []
+
+    // Declara o array com a entrada e a saída definida pelo usuário
+    let InOut = []
+
     // Array da saida
     let saida = []
 
     // Array dos pontos
     let pontos = []
+
+    // Array de pontos para texto
+    let pontosTexto = []
 
     // Declara o event listener como false
     let eventListenerAtivado = false
@@ -68,6 +79,9 @@
         // Tabela de coordenadas
         let coordenadas = JSON.parse(sessionStorage.getItem('coordenadas'))
 
+        // Pontos base
+        const pontosBase = JSON.parse(sessionStorage.getItem('pontosBase'))
+
         // Carrega a imagem no Canvas
         const img = document.getElementById('mesaIMG')
 
@@ -77,7 +91,7 @@
             ctx.drawImage(img, 0, 0, 1280, 720)
 
             // Cria os pontos com base na tabela de coordenadas
-            for (i = 1; i < 13; i++)
+            for (i = 0; i < coordenadas.length; i++)
             {
     
                 // Pega as coordenadas com base na contagem 'i'
@@ -86,22 +100,52 @@
     
                 // Desenha o círculo na coordenada atual
                 ctx.beginPath()
-                ctx.arc(x, y, 10, 0, 2 * Math.PI)
+                ctx.arc(x, y, 15, 0, 2 * Math.PI)
                 ctx.fillStyle = 'orange'
                 ctx.strokeStyle = 'orange'
                 ctx.fill()
                 ctx.stroke()
+                ctx.save()
     
                 // Desenha o texto para a coordenada atual acima do círculo
-                ctx.font = '30px Arial'
+                ctx.font = '20px Arial'
                 ctx.textAlign = 'center'
-                ctx.fillText(i, x, y + 40)
+                ctx.fillStyle = 'black'
+                ctx.fillText(i + 1, x, y + 8)
+                ctx.restore()
     
                 // Salva as informações de coordenada, diâmetro e nome do botão
-                let botao = {'x': x, 'y': y, 'size': 20, 'nome': i}
+                let botao = {'x': x, 'y': y, 'size': 15, 'nome': i}
     
                 // Envia para o Array Botões
                 botoes.push(botao)
+            }
+            for(i = 0; i < pontosBase.length; i++)
+            {
+                const nome = pontosBase[i][0]
+                const cor = pontosBase[i][1]
+                const coord = pontosBase[i][2]
+
+                const x = coord[0]
+                const y = coord[1]
+
+                ctx.beginPath()
+                ctx.arc(x, y, 30, 0, 2 * Math.PI)
+                ctx.fillStyle = cor
+                ctx.strokeStyle = cor
+                ctx.fill()
+                ctx.stroke()
+                ctx.save()
+
+                ctx.font = '20px Arial'
+                ctx.textAlign = 'center'
+                ctx.fillStyle = 'black'
+                ctx.fillText(nome, x, y + 8)
+                ctx.restore()
+
+                let pos = {'x': x, 'y': y, 'size': 30, 'nome': nome}
+
+                InOutPos.push(pos)
             }
         }
 
@@ -130,8 +174,7 @@
                 const mouseX = event.clientX - rect.left
                 const mouseY = event.clientY - rect.top
 
-                // Loop para detectar se algum botão foi clicado
-
+                // Loop para detectar se algum botão de coordenada foi clicado
                 botoes.forEach(botao => {
 
                     // Lógica para detectar se o mouse está dentro das extremidades do botão
@@ -140,6 +183,9 @@
 
                         // Envia o botão selecionado para um array da saída
                         pontos.push(botao.nome)
+
+                        // Adapta o nome dos botões para visualização
+                        pontosTexto.push(botao.nome + 1)
 
                         // Emite um alerta no console
                         console.log(`O botão ${botao.nome} foi selecionado`)
@@ -162,7 +208,34 @@
                         }
 
                         // Ajusta o output
-                        outputTexto.innerText = pontos
+                        outputTexto.innerText = pontosTexto
+                    }
+                })
+
+                // Loop para detectar se algum botão de base foi clicado
+                InOutPos.forEach(botao => {
+                    if (mouseX > botao.x - 30 && mouseX < botao.x + 30 && mouseY > botao.y - 30 && mouseY < botao.y + 30)
+                    {
+                        if(InOut.length < 2)
+                        {
+                            console.log(botao.nome)
+                            InOut.push(botao.nome)
+                        }
+                        else
+                        {
+                            confirm(`O limite de pontos de base é 2!
+                            Deseja remover os pontos atuais?`)
+
+                            if(confirm)
+                            {
+                                InOut = []
+                                window.alert('Pontos base removidos com sucesso')
+                            }
+                            else
+                            {
+                                console.log('O usuário negou a operação')
+                            }
+                        }
                     }
                 })
 
@@ -176,65 +249,93 @@
 
     function enviar()
     {
+
+        let resp = ''
+
         // Identifica o input responsável pelo nome da saída
         let nomeSaida = document.getElementById('nomeSaidaInput').value
 
+        // Verifica se não há uma saída com esse mesmo nome
+        const saidaExistente = JSON.parse(localStorage.getItem(nomeSaida))
+
         // Identifica o input responsável pela cor da saída
         let corSaida = document.getElementById('corSaidaInput').value
+
+        // Cria as mensagens
+
+        msgDup = `
+        
+            A saída com nome ${nomeSaida} já existe!
+            Os pontos selecionados são ${pontosTexto}.
+            
+            Deseja prosseguir com a substituição?
+            `
 
         // Envia a missão selecionada para o LocalStorage
         msg = `
 
             Você está prestes a definir a missão ${nomeSaida}
-            com os pontos ${pontos}.
+            com os pontos ${pontosTexto}.
             
             Deseja prosseguir?
         
         `
-        if(confirm(msg))
+        if(saidaExistente != null)
+        {
+            resp = confirm(msgDup)
+        }
+        else
+        {
+            resp = confirm(msg)
+        }
+
+        if(resp)
         {
             // Salva todos os dados no Array de saída
-            saida.push(corSaida, pontos)
-
+            saida.push(corSaida, pontos, InOut)
+            
             // Executa a função
             localStorage.setItem(nomeSaida, JSON.stringify(saida))
-
+            
             // Recarrega a página
             window.location.reload()
         }
+        }
 
-    }
 
     // Função para excluir pontos específicos
     function removerPontos()
     {
         // Define as mensagens dinâmicas
         multiponto = `Você está prestes a apagar os pontos. Tem certeza?
-        Os pontos a serem excluídos são: ${pontos}`
+        Os pontos a serem excluídos são: ${pontosTexto}`
 
         uniponto = `Você está prestes a apagar apenas um ponto. Tem certeza?
-        Você ira apagar o ponto ${pontos}`
+        Você ira apagar o ponto ${pontosTexto}`
 
         // Ajusta dinamicamente
-        if(pontos == 1 && confirm(uniponto))
+        if(pontos.length == 1 && confirm(uniponto))
         {
             // Avisa e realiza a limpeza
-            window.alert(`Você apagou o ponto ${pontos}`)
+            window.alert(`Você apagou o ponto ${pontosTexto}`)
             pontos = []
+
             // Emite o output para o usuário
             outputLabel.innerText = 'Sem pontos selecionados' 
-            outputTexto.innerText = pontos
+            outputTexto.innerText = pontosTexto
 
         }
 
-        else if (pontos > 1 && confirm(multiponto))
+        else if (pontos.length > 1 && confirm(multiponto))
         {
             // Avisa e realiza a limpeza
-            window.alert(`Você apagou os pontos ${pontos}`)
+            window.alert(`Você apagou os pontos ${pontosTexto}`)
             pontos = []
+            pontosTexto = []
+
             // Emite o output para o usuário
             outputLabel.innerText = 'Sem pontos selecionados' 
-            outputTexto.innerText = pontos
+            outputTexto.innerText = pontosTexto
         }
 
         else
@@ -242,7 +343,8 @@
             // Retorna a mensagem
             window.alert(`Operação cancelada! O usuário negou a operação ou não há botões a serem apagados`)
         }
-    }   
+    }
+    
 </script>
 
 </html>
