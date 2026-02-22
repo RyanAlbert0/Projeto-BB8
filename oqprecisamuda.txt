@@ -1,0 +1,3 @@
+Aplicar na função de clique do Editar o sistema assíncrono para o registro de cliques usado na função editarCanvas() e editarBaseCanvas()
+
+Procurar por problemas de execução e possíveis ações do usuário

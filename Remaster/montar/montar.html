@@ -24,13 +24,13 @@
         <input id="nomeSaidaInput" type="text" placeholder="Defina o nome da saída">
         <input id="corSaidaInput" type="color">
         <button id="enviarSaidaBTN" onclick="enviar()" type="button">Enviar Saídas</button>
-        <div id="pontosSelecionadosDiv">
+        <div id="informacoesUsuario">
             <label id="pontosSelecionadosTexto">Nenhum ponto selecionado</label>
             <p id="pontosSelecionadosOutput"></p>
+            <label>Bases:</label>
+            <p id="basesDefinidas">Bases não selecionadas</p>
         </div>
         <button id="removerPontosBTN" type="button" onclick="removerPontos()">Apagar pontos</button>
-        <p id="x">x</p>
-        <p id="y">y</p>
         
 
     </div>
@@ -54,6 +54,9 @@
 
     // Array de pontos para texto
     let pontosTexto = []
+
+    // Variável com a confirmação do usuário
+    let resp = false
 
     // Declara o event listener como false
     let eventListenerAtivado = false
@@ -214,10 +217,15 @@
                 InOutPos.forEach(botao => {
                     if (mouseX > botao.x - 30 && mouseX < botao.x + 30 && mouseY > botao.y - 30 && mouseY < botao.y + 30)
                     {
+
+                        const p = document.getElementById('basesDefinidas')
+
                         if(InOut.length < 2)
                         {
                             console.log(botao.nome)
                             InOut.push(botao.nome)
+                            p.innerText = InOut
+
                         }
                         else
                         {
@@ -228,11 +236,16 @@
                             {
                                 InOut = []
                                 window.alert('Pontos base removidos com sucesso')
+                                p.innerText = 'Bases não selecionadas'
                             }
                             else
                             {
                                 console.log('O usuário negou a operação')
                             }
+                        }
+
+                        if(InOut.length == 2)
+                        {
                         }
                     }
                 })
@@ -248,7 +261,7 @@
     function enviar()
     {
 
-        let resp = ''
+
 
         // Identifica o input responsável pelo nome da saída
         let nomeSaida = document.getElementById('nomeSaidaInput').value
@@ -278,7 +291,12 @@
             Deseja prosseguir?
         
         `
-        if(saidaExistente != null)
+
+        if(pontos.length == 0)
+        {
+            window.alert('Você não definiu pontos!')
+        }
+        else if(saidaExistente != null)
         {
             resp = confirm(msgDup)
         }
@@ -286,8 +304,9 @@
         {
             resp = confirm(msg)
         }
-
-        if(resp)
+        
+        
+        if(resp && corSaida != null && pontos != [] && InOut.length == 2)
         {
             // Salva todos os dados no Array de saída
             saida.push(corSaida, pontos, InOut)
@@ -298,7 +317,13 @@
             // Recarrega a página
             window.location.reload()
         }
+        else
+        {
+            console.log(resp)
+            window.alert(`Há informações faltantes! Verifique se você definiu as bases, pontos e nome da saída`)
         }
+    }
+    
 
 
     // Função para excluir pontos específicos
@@ -321,7 +346,6 @@
             // Emite o output para o usuário
             outputLabel.innerText = 'Sem pontos selecionados' 
             outputTexto.innerText = pontosTexto
-
         }
 
         else if (pontos.length > 1 && confirm(multiponto))
