@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../imagens/icon-bb8.png">
+    <title>Visualizar Saída - BB8: Archaeologist</title>
+</head>
+<body>
+    <div id="header">
+        <button onclick="window.location.href = '../interface/interface.html'" id="home"><img src="../imagens/casa.png" width="50" height="50"></button>
+        <h1>Editar Montagem de Saída - BB8: Archaeologist</h1>
+        <img src="../imagens/Logo SESI 2.png" id="logoSESI">
+    </div>
+    <div id="content">
+        <div id="img">
+        <canvas id="mesa" width="1280" height="720" style="border: 1px solid black;"></canvas>
+        <img src="../imagens/table.jpg" id="mesaIMG" style="display: none;">
+        </div>
+    </div>
+    <div id="opcoesSaida">
+
+    </div>
+</body>
+
+<script>
+
+    function carregarSaidas()
+    {
+        for(i = 0; i < localStorage.length; i++)
+        {
+            let key = localStorage.key(i)
+
+            if(key === 'missoes' || key === 'primeiroAcesso') continue
+
+            let check = document.createElement('input')
+
+            let saida = document.createElement('div')
+
+            let label = document.createElement('label')
+
+            saida.id = `saida${key}`
+            check.type = 'checkbox'
+            label.innerText = key[0].toUpperCase() + key.substring(1)
+
+            saida.appendChild(check)
+            saida.appendChild(label)
+
+            document.getElementById('opcoesSaida').appendChild(saida)
+
+            check.addEventListener('change', function()
+            {
+                if(this.checked)
+                {
+                    console.log(`O checkbox ${key} foi ativado!`)
+                    canvas(key)
+                }
+                else if(this.checked == false)
+                {
+                    console.log(`O checkbox ${key} foi desativado!`)
+                    
+                }
+            }
+            )
+        }
+    }
+
+    carregarSaidas()
+
+    const c = document.getElementById('mesa')
+
+    const ctx = c.getContext('2d')
+
+    const img = document.getElementById('mesaIMG')
+
+    img.onload = function()
+    {
+        ctx.drawImage(img, 0, 0, 1280, 720)
+    }
+
+
+
+
+    function canvas(key) 
+    {
+
+        let dados = JSON.parse(localStorage.getItem(key))
+        let coordenadas = JSON.parse(sessionStorage.getItem('coordenadas'))
+        let coordenada = dados[1]
+        console.log(coordenada)
+
+        coordenada.forEach(ponto => {
+            coordenada = coordenadas[dados[1]]
+            const x = coordenada[0]
+            const y = coordenada[1]
+            console.log(x + ' ' + y)
+
+            ctx.beginPath()
+            ctx.arc(x, y, 15, 0, 2 * Math.PI)
+            ctx.fillStyle = dados[0]
+            ctx.strokeStyle = dados[0]
+            ctx.fill()
+            ctx.stroke()
+        });
+    }
+</script>
+
+</html>

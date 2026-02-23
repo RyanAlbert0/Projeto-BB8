@@ -58,11 +58,17 @@
     // Declara o array de in out usados
     let InOut = []
 
+    // Declara a variável do botão selecionado
+    let botaoSelect = []
+
     // Captura os pontos de base
     const pontosBase = JSON.parse(sessionStorage.getItem('pontosBase'))
 
-    // Define o dicionário
+    // Define o dicionário de bases
     let pontosBaseDict = {}
+
+    // Declara o array das bases selecionadas
+    let InOutPos = []
 
    // Converte para um dicionário
    for (i = 0; i < 2; i++)
@@ -70,10 +76,9 @@
         // Captura os dados necessários do pontosBase
         let [nome, cor, x, y] = pontosBase[i]
 
-       pontosBaseDict[nome] = {'nome': nome, 'cor': cor, 'x': x, 'y': y}
+        pontosBaseDict[nome] = {'nome': nome, 'cor': cor, 'x': x, 'y': y}
 
-       InOutPos = []
-       InOutPos.push({'nome': nome, 'cor': cor, 'x': x, 'y': y})
+        InOutPos.push({'nome': nome, 'cor': cor, 'x': x, 'y': y})
 
    }
 
@@ -173,8 +178,7 @@
                 // Aplica o valor e o texto como o ponto da lista
                 opt.value = pontos[i]
 
-
-
+                // Corrige o nome da option com um template e o n´´umero do ponto
                 opt.innerHTML = `Ponto nº ${pontosUsados[i] + 1}`
                 
                 // Insere essa option ao Select de pontos
@@ -221,22 +225,32 @@
     )
     }
 
+    // Verifica se o event listener de cores já está aplicado
     if(eventListenerCoresAtivado == false)
     {
+        // Se for verdade, adiciona o event listener ao input 'cores'
         cores.addEventListener('change', function()
     {
-
+        // Identifica qual é a saída selecionada
         const saida = select.options[select.selectedIndex].text
+
+        // Captura os dados da respectiva saída do localStorage
         let LS = JSON.parse(localStorage.getItem(saida))
+
+        // Altera o parâmetro de cores da saída
         LS[0] = cores.value
 
+        // Ativa a função do Canvas
         canvas()
 
+        // Desativa o bloco de cores
         document.getElementById('confirmCores').style.display = 'block'
 
 
     })
     }
+
+    // Função responsável por desenhar todo o mapa, pontos e traços.
     function canvas() 
     {
 
@@ -353,10 +367,7 @@
                     // Captura os dados da tabela pontosBase conforme o InOut
                     let [nome, cor, x, y] = pontosBase[i]
 
-                    // 
-
-                    console.log(nome)
-
+                    
                     ctx.beginPath()
                     ctx.arc(x, y, 30, 0, 2 * Math.PI)
                     ctx.fillStyle = cor
@@ -426,13 +437,16 @@
 
             let foiClicado = false
 
-            foiClicado = await clique()
+            console.log('O clique foi chamado')
 
-            console.log('Estado do Clique ' + foiClicado)
+            resultado = await clique(botoes)
 
-                if(foiClicado == true && pontosS.options[pontosS.selectedIndex].text != 'Selecione um ponto')
+            console.log('Estado do Clique ' + resultado[0])
+
+                if(resultado[0] == true && pontosS.options[pontosS.selectedIndex].text != 'Selecione um ponto')
                 {
-                    
+                    botao = resultado[1]
+
                     if(pontosS.options[pontosS.selectedIndex].text == '+')
                     {
                         // Adiciona um substituto ao elemento anterior
@@ -466,35 +480,41 @@
                 
             }
 
-    async function clique() 
+
+    function clique(listaBotoes) 
         {
-            // Aplicar o detector de clique ao Canvas
-            if (eventListenerCanvasAtivado == false)
-            {
-            c.addEventListener('click', function(event) {
+            return new Promise((resolve) => {
+                if (eventListenerCanvasAtivado == false)
+                {
+                c.addEventListener('click', function(event) {
+    
+                    // Define o tamanho do Canvas e a posição
+                    const rect = c.getBoundingClientRect()
+    
+                    // Define a posição X e Y do mouse
+                    const mouseX = event.clientX - rect.left
+                    const mouseY = event.clientY - rect.top
+    
+                    // Loop para detectar se algum botão foi clicado
+    
+                        listaBotoes.forEach(botao => {
+                            
+                            // Lógica para detectar se o mouse está dentro das extremidades do botão
+                            if (mouseX > botao.x - 10 && mouseX < botao.x + 10 && mouseY > botao.y - 10 && mouseY < botao.y + 10)
+                            {
+                                resolve([true,botao])
+                            }
+            })})}
 
-                // Define o tamanho do Canvas e a posição
-                const rect = c.getBoundingClientRect()
-
-                // Define a posição X e Y do mouse
-                const mouseX = event.clientX - rect.left
-                const mouseY = event.clientY - rect.top
-
-                // Loop para detectar se algum botão foi clicado
-
-                    botoes.forEach(botao => {
-                        
-                        // Lógica para detectar se o mouse está dentro das extremidades do botão
-                        if (mouseX > botao.x - 10 && mouseX < botao.x + 10 && mouseY > botao.y - 10 && mouseY < botao.y + 10)
-                        {
-                            console.log('Clique computado')
-                            return true
-                        }
-        })})}
+            }
+        )
+                // Aplicar o detector de clique ao Canvas
 
             // Define o Event Listener como Já ativado
             eventListenerCanvasAtivado = true
             }
+       
+
 
     // Função que limpa o select de pontos
     function resetPontosS()
@@ -555,6 +575,7 @@
          * @param {array} ls - O array com os dados originais do LocalStorage
          * @param {array} ps - O array com os dados atualizados locais
          * @param {string} ex - A saída (vulgo chave) que armazenará os dados no localStorage
+         * @param {array} io - Definição de base de entrada e de saída
         */
 
         ls[1] = ps
@@ -623,7 +644,7 @@
             LS[0] = cores.value
             localStorage.setItem(selectedOption, JSON.stringify(LS))
 
-            document.getElementById('confirmCores').style.display = 'none'
+            window.location.reload()
 
         }
     }
@@ -678,18 +699,42 @@
         }
 
 
-                
-            // Detecta o clique do usuário
-            let foiClicado = false
-
-            foiClicado = clique()
-
-            if(foiClicado == true)
+        for(i = 0; i < 2; i++)
+        {
+            if(i == 0)
             {
-                console.log(InOut)
+                window.alert('Defina a base de entrada')
+                resultado = await clique(InOutPos)
+                if(resultado[0])
+                {
+                    console.log(resultado[0])
+                    console.log(resultado[1]['nome'])
+                    InOut[0] = resultado[1]['nome']
+                }
+            }
+            if(i == 1)
+            {
+                window.alert('Defina a base de saída')
+                resultado = await clique(InOutPos)
+                if(resultado[0])
+                {
+                    console.log(resultado[0])
+                    console.log(resultado[1]['nome'])
+                    InOut[1] = resultado[1]['nome']
+                }
             }
 
-            }
+
+
+        }
+
+        const saida = select.options[select.selectedIndex].text
+        LS = JSON.parse(localStorage.getItem(saida))
+        LS[2] = InOut
+
+        localStorage.setItem(saida, JSON.stringify(LS))
+        canvas()
+        }
 
 </script>
 

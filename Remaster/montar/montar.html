@@ -123,13 +123,17 @@
                 // Envia para o Array Botões
                 botoes.push(botao)
             }
+
+            // Desenha as bases
             for(i = 0; i < pontosBase.length; i++)
             {
+                // Declara os dados necessários
                 const nome = pontosBase[i][0]
                 const cor = pontosBase[i][1]
                 const x = pontosBase[i][2]
                 const y = pontosBase[i][3]
 
+                // Faz o traço do círculo
                 ctx.beginPath()
                 ctx.arc(x, y, 30, 0, 2 * Math.PI)
                 ctx.fillStyle = cor
@@ -138,14 +142,17 @@
                 ctx.stroke()
                 ctx.save()
 
+                // Desenha o texto
                 ctx.font = '20px Arial'
                 ctx.textAlign = 'center'
                 ctx.fillStyle = 'black'
                 ctx.fillText(nome, x, y + 8)
                 ctx.restore()
 
+                // Salva os dados da base
                 let pos = {'x': x, 'y': y, 'size': 30, 'nome': nome}
 
+                // Envia a base para InOut
                 InOutPos.push(pos)
             }
         }
@@ -188,9 +195,6 @@
                         // Adapta o nome dos botões para visualização
                         pontosTexto.push(botao.nome + 1)
 
-                        // Emite um alerta no console
-                        console.log(`O botão ${botao.nome} foi selecionado`)
-
                         // Checa se tem um ou mais pontos em pontos
                         if(pontos.length == 1)
                         {
@@ -222,17 +226,14 @@
 
                         if(InOut.length < 2)
                         {
-                            console.log(botao.nome)
                             InOut.push(botao.nome)
                             p.innerText = InOut
 
                         }
                         else
                         {
-                            confirm(`O limite de pontos de base é 2!
-                            Deseja remover os pontos atuais?`)
-
-                            if(confirm)
+                            let resp = confirm(`O limite de pontos de base é 2!\nDeseja remover os pontos atuais?`)
+                            if(resp)
                             {
                                 InOut = []
                                 window.alert('Pontos base removidos com sucesso')
@@ -240,12 +241,8 @@
                             }
                             else
                             {
-                                console.log('O usuário negou a operação')
-                            }
-                        }
 
-                        if(InOut.length == 2)
-                        {
+                            }
                         }
                     }
                 })
@@ -261,7 +258,14 @@
     function enviar()
     {
 
+        // Define o validador de saída
+        let saidaIsTrue = false
 
+        // Define o validador de pontos
+        let pontosIsTrue = false
+
+        // Define o validador de bases
+        let basesIsTrue = false
 
         // Identifica o input responsável pelo nome da saída
         let nomeSaida = document.getElementById('nomeSaidaInput').value
@@ -271,6 +275,45 @@
 
         // Identifica o input responsável pela cor da saída
         let corSaida = document.getElementById('corSaidaInput').value
+
+        // Verifica se a saída é válida
+        if(nomeSaida == '')
+        {   
+            // Se não for, exibe o alerta e define o validador de saída como false
+            saidaIsTrue = false
+            window.alert('Você não definiu o nome da saída!')
+        }
+        else
+        {
+            // Caso contrário, define o validador como true
+            saidaIsTrue = true
+        }
+
+        // Verifica se a seleção de pontos é válida
+        if(pontos.length == 0)
+        {
+            // Se não for, exibe o alerta e define o validador de pontos como false
+            pontosIsTrue = false
+            window.alert('Você não definiu pontos!')
+        }
+        else
+        {
+            // Caso contrário, define o validador como true
+            pontosIsTrue = true
+        }
+
+        // Verifica se as bases são válidas
+        if(InOut.length != 2)
+        {
+            // Se não for, exibe o alerta e define o validador de base como false
+            basesIsTrue = false
+            window.alert(`Você não definiu as duas bases!`)
+        }
+        else
+        {
+            // Caso contrário, define o validador como true
+            basesIsTrue = true
+        }
 
         // Cria as mensagens
 
@@ -291,23 +334,25 @@
             Deseja prosseguir?
         
         `
+        // Verifica se todos os validadores são true
+        if(pontosIsTrue && saidaIsTrue && basesIsTrue)
+        {
+            // Verifica se já existe uma saída no localStorage
+            if(saidaExistente != null)
+            {
+                // Se houver, pergunte se quer substituir
+                resp = confirm(msgDup)
+            }
+            else
+            {
+                // Se não, pede confirmação do usuário
+                resp = confirm(msg)
+            }
 
-        if(pontos.length == 0)
-        {
-            window.alert('Você não definiu pontos!')
-        }
-        else if(saidaExistente != null)
-        {
-            resp = confirm(msgDup)
-        }
-        else
-        {
-            resp = confirm(msg)
-        }
-        
-        
-        if(resp && corSaida != null && pontos != [] && InOut.length == 2)
-        {
+            // Se a resposta do usuário for verdadeira (seja para substituir, seja para salvar)
+            if(resp)
+            {
+
             // Salva todos os dados no Array de saída
             saida.push(corSaida, pontos, InOut)
             
@@ -316,12 +361,11 @@
             
             // Recarrega a página
             window.location.reload()
+            }
         }
-        else
-        {
-            console.log(resp)
-            window.alert(`Há informações faltantes! Verifique se você definiu as bases, pontos e nome da saída`)
-        }
+
+        
+        
     }
     
 
