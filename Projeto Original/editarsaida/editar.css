@@ -84,7 +84,7 @@ body {
 }
 
 /* Estilo para o botão */
-#exibir {
+#exibir, #salvar, #apagar {
     width: 30%;
     height: 40px;
     margin: 10px 0;
