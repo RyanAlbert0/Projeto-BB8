@@ -6,11 +6,151 @@
     <title>Document</title>
 </head>
 <body>
-    <p>Texto</p>
+    <div id="content">
+        <div id="img">
+        <canvas id="mesa" width="1280" height="720" style="border: 1px solid black;"></canvas>
+        <img src="Remaster/imagens/table.jpg" id="mesaIMG" style="display: none;">
+        </div>
+        <div id="checkboxes">
+            
+        </div>
+    </div>
 
     <script>
+    
+    let saidasSelected = []
 
-        const dict = {'carlos': 'Pneu', 'Clebinho': 'Motor'}
+    function addElemento()
+    {
+        const CaixaPai = document.getElementById('checkboxes')
+
+        for(i = 0; i < localStorage.length; i++)
+        {
+            const key = localStorage.key(i)
+
+            if (key === 'missoes' || key === 'primeiroAcesso') continue
+
+            const div = document.createElement('div')
+            div.id = `Div${key}`
+            div.classList.add('CaixaOpções')
+
+            const label = document.createElement('label')
+            label.textContent = key
+            label.id = `Id${key}`
+            label.classList.add(`Titulo`)
+            div.append(label)
+
+            const checkbox = document.createElement('input')
+            checkbox.type = 'checkbox'
+            checkbox.value = key
+
+            checkbox.addEventListener('change', function()
+            {
+                if(checkbox.checked)
+                {
+                    saidasSelected.push(key)
+                    console.log(saidasSelected)
+                }
+                else
+                {
+                    for(i = 0; i < saidasSelected.length; i++)
+                    {
+                        if(saidasSelected[i] == key)
+                        {
+                            saidasSelected.splice(i, 1)
+                        }
+                    }
+
+                    console.log(saidasSelected)
+                }
+
+                canvas()
+            })
+
+            div.append(checkbox)
+
+            CaixaPai.append(div)
+        }
+    }
+
+    const c = document.getElementById('mesa')
+    const ctx = c.getContext('2d')
+    
+    // Tabela de coordenadas
+    let coordenadas = JSON.parse(sessionStorage.getItem('coordenadas'))
+
+    // Pontos base
+    const pontosBase = JSON.parse(sessionStorage.getItem('pontosBase'))
+
+    function renderImagem()
+    {
+        // Carrega a imagem no Canvas
+        const img = document.getElementById('mesaIMG')
+    
+        // Se a imagem estiver carregada, aplique ao Canvas
+        img.onload = function()
+        {
+            ctx.drawImage(img, 0, 0, 1280, 720)
+        }
+    }
+    
+    function canvas() 
+    {
+        ctx.clearRect(0, 0, 1280, 720)
+        
+                // Carrega a imagem no Canvas
+        const img = document.getElementById('mesaIMG')
+    
+        // Se a imagem estiver carregada, aplique ao Canvas
+            ctx.drawImage(img, 0, 0, 1280, 720)
+
+
+        saidasSelected.forEach(key => {
+            
+            const saida = JSON.parse(localStorage.getItem(key))
+            const cor = saida[0]
+            const pontos = saida[1]
+            InOut = saida[2]
+
+            pontos.forEach((ponto, idx) => 
+            {
+                let coords = coordenadas[ponto]
+
+                const x = coords[0]
+                const y = coords[1]
+
+                ctx.beginPath()
+                ctx.arc(x, y, 15, 0, 2 * Math.PI)
+                ctx.fillStyle = cor
+                ctx.strokeStyle = cor
+                ctx.fill()
+                ctx.stroke()
+
+                if(idx == 0)
+                {
+                    const bx = pontosBaseDict[InOut[0]].x
+                    const by = pontosBaseDict[InOut[0]].y
+
+                    ctx.moveTo(bx, by)
+                    ctx.lineTo(x, y)
+                    ctx.lineWidth = 5
+                    ctx.stroke()
+                }
+
+            }
+        
+            
+        )
+
+
+        });
+    }
+    
+    renderImagem()
+
+
+
+
     </script>
 </body>
 </html>
